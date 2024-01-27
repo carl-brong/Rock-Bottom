@@ -16,18 +16,15 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     [Header("Movement Metrics")]
-    [SerializeField] private float maxHorizontalSpeed = 10f;
-    [SerializeField] private float horizontalAcceleration = 50f;
+    [SerializeField] private float speed = 10f;
     [SerializeField] private float terminalVelocity = -20f;
-    [SerializeField] private float jumpHeight = 20f;
+    [SerializeField] private float jumpHeight = 25f;
     [SerializeField] private float jumpBuffer = 0.2f;
     [SerializeField] private float coyoteTime = 0.2f;
 
-    private float horizontalSpeed = 0f;
     private float direction;
     private float jumpBufferCounter;
     private float coyoteTimeCounter;
-    private bool isJumping = false;
     public bool IsMoving { get; private set; }
 
 
@@ -35,22 +32,11 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         direction = Input.GetAxisRaw("Horizontal");
-       
 
-        //Horizontal Movement w/ Acceleration
-        if (direction != 0 && horizontalSpeed < maxHorizontalSpeed)
-        {
-            horizontalSpeed += horizontalAcceleration * Time.deltaTime;   
-        }
-        if (direction == 0 && horizontalSpeed > 0)
-        {
-            horizontalSpeed = 0f;
-        }
         //Coyote Time
         if (IsGrounded())
         {
             coyoteTimeCounter = coyoteTime;
-            isJumping = false;
         }
         else
         {
@@ -71,7 +57,8 @@ public class PlayerControls : MonoBehaviour
         if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
-            isJumping = true;
+            jumpBufferCounter = 0f;
+            coyoteTimeCounter = 0f;
         }
         if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0f)
         {
@@ -82,8 +69,7 @@ public class PlayerControls : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(direction * horizontalSpeed, (rb.velocity.y > terminalVelocity) ? rb.velocity.y : terminalVelocity);
-        postApex();
+        rb.velocity = new Vector2(direction * speed, (rb.velocity.y > terminalVelocity) ? rb.velocity.y : terminalVelocity);
     }
 
     private bool IsGrounded()
@@ -91,15 +77,4 @@ public class PlayerControls : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    private void postApex()
-    {
-        if (isJumping && rb.velocity.y < 0f)
-        {
-            rb.gravityScale = 19.6f;
-        }
-        else
-        {
-            rb.gravityScale = 9.8f;
-        }
-    }
 }
