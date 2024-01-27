@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -65,6 +66,9 @@ public class PlayerControls : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
+        Aim();
+        Debug.Log(Input.mousePosition);
+
     }
 
     void FixedUpdate()
@@ -77,4 +81,18 @@ public class PlayerControls : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
+    private void Aim()
+    {
+        Vector3 temp = transform.localScale;
+        if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x < transform.position.x)
+        {
+            temp.x = -1f;
+            
+        }
+        else
+        {
+            temp.x = 1f;
+        }
+        transform.localScale = temp;
+    }
 }
