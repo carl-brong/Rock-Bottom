@@ -16,7 +16,7 @@ public class GrapplingHook : MonoBehaviour
     [SerializeField] private LineRenderer rope;
     [SerializeField] private SpringJoint2D tether;
 
-    private PlayerController player;
+    public PlayerController player;
     private Rigidbody2D rb;
     private Vector2 grappleAnchor;
     private float grappleTime = 0f;
@@ -53,6 +53,7 @@ public class GrapplingHook : MonoBehaviour
             rope.enabled = false;
             tether.enabled = false;
             rope.SetPosition(1, transform.position);
+            player.isGrappling = false;
         }
     }
 
@@ -60,6 +61,8 @@ public class GrapplingHook : MonoBehaviour
     {
         Vector2 mousePos = GetMousePosition();
         RaycastHit2D hit = Physics2D.Raycast(mousePos, direction: Vector2.zero, distance: Mathf.Infinity, layerMask: groundLayer);
+        Debug.Log(hit.collider);
+
         if (hit.collider != null)
         {
             grappleAnchor = hit.point;
