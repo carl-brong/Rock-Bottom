@@ -204,10 +204,10 @@ MonoBehaviour:
   accelTime: 2.5
   deccelTime: 2
   maxSpeed: 11
-  jumpHeight: 20
+  jumpHeight: 30
   coyoteTime: 0.2
   jumpBuffer: 0.2
-  gravityScale: 2
+  gravityScale: 10
   isGrappling: 0
 --- !u!114 &1181697957349451720
 MonoBehaviour:

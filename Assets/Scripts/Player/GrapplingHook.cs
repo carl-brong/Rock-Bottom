@@ -44,7 +44,10 @@ public class GrapplingHook : MonoBehaviour
         else if (Input.GetKey(KeyCode.Mouse0))
         {
             grappleTime += Time.deltaTime;
-            DrawRope();
+            if (rope.enabled)
+            {
+                DrawRope(); 
+            }
             SetTether();
 
         }
@@ -81,16 +84,13 @@ public class GrapplingHook : MonoBehaviour
         float progression = grappleTime / 0.1f;
         Vector2 step = Vector2.Lerp(transform.position, grappleAnchor, progression);
         rope.SetPosition(1, step);
-        if (step == grappleAnchor && rope.enabled)
-        {
-            player.isGrappling = true;
-        }
     }
 
     private void SetTether()
     {
-        if (player.isGrappling)
+        if ((Vector2)rope.GetPosition(1) == grappleAnchor)
         {
+            player.isGrappling = true;
             tether.connectedAnchor = grappleAnchor;
             tether.enabled = true;
         }
