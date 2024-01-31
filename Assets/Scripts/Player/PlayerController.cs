@@ -30,14 +30,18 @@ public class PlayerController : MonoBehaviour
     private float coyoteTimeCounter;
     private float jumpBufferCounter;
 
-    public bool isGrappling;
+    private bool isGrappling;
     private bool isJumping;
     private bool isJumpFalling;
+
+    private GrapplingHook grapplingHook;
 
     // Start is called before the first frame update
     void Start()
     {
         rb.gravityScale = gravityScale;
+        grapplingHook = GetComponent<GrapplingHook>();
+        grapplingHook.enabled = false;
         isGrappling = false;
     }
 
@@ -49,15 +53,32 @@ public class PlayerController : MonoBehaviour
         jumpBufferCounter -= Time.deltaTime;
 
         Jump();
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            grapplingHook.enabled = true;
+            isGrappling = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            grapplingHook.enabled = false;
+            isGrappling = false;
+        }
         
     }
 
     private void FixedUpdate()
     {
-        if (!isGrappling || OnGround())
+        if (isGrappling && !OnGround())
         {
-            Run();
+            grapplingHook.LockRope();
         }
+        else
+        {
+            grapplingHook.UnlockRope();
+        }
+        Run();
+        
     }
 
     private void Run()
