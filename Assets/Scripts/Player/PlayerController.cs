@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb.gravityScale = gravityScale;
+
         grapplingHook = GetComponent<GrapplingHook>();
         grapplingHook.enabled = false;
         isGrappling = false;
@@ -170,4 +171,32 @@ public class PlayerController : MonoBehaviour
         return coyoteTimeCounter > 0f && !isJumping;
     }
 
+    // Flip player in the direction of mouse
+    private void MouseLook()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 localScale = transform.localScale;
+        if (mousePos.x < transform.position.x)
+        {
+            localScale.x = -1;
+        }
+        else
+        {
+            localScale.x = 1;
+        }
+        transform.localScale = localScale;
+    }
+
+    // Collision Checks
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Hazard"))
+        {
+            Debug.Log("Hit Hazard");
+        }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Safe"))
+        {
+            Debug.Log("Hit Safe");
+        }
+    }
 }
