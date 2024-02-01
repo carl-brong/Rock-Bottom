@@ -44,7 +44,7 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(rb.position.x + "," + rb.position.y);
+        //Debug.Log(rb.position.x + "," + rb.position.y);
         groundCheck();
         //move l / r
         float horizInput = Input.GetAxis("Horizontal");
