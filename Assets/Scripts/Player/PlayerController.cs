@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
@@ -21,14 +21,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight;
     [SerializeField][Range(0, 1)] private float coyoteTime;
     [SerializeField][Range(0, 1)] private float jumpBuffer;
+    [SerializeField][Range(0, 1)] private float hangTime;
     [SerializeField] private float gravityScale;
     [SerializeField] private float terminalSpeed;
 
+    private Rigidbody2D rb;
     private float accelForce;
     private float deccelForce;
     private float move_x;
     private float coyoteTimeCounter;
     private float jumpBufferCounter;
+    private float hangTimeCounter;
 
     private bool isGrappling;
     private bool isJumping;
@@ -39,11 +42,15 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = gravityScale;
 
         grapplingHook = GetComponent<GrapplingHook>();
         grapplingHook.enabled = false;
         isGrappling = false;
+
+        accelForce = accelTime / maxSpeed;
+        deccelForce = maxSpeed / deccelTime;
     }
 
     // Update is called once per frame
@@ -52,7 +59,9 @@ public class PlayerController : MonoBehaviour
         move_x = Input.GetAxisRaw("Horizontal");
         coyoteTimeCounter -= Time.deltaTime;
         jumpBufferCounter -= Time.deltaTime;
+        hangTimeCounter -= Time.deltaTime;
 
+        MouseLook();
         Jump();
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -111,11 +120,6 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    private void OnValidate()
-    {
-        accelForce = maxSpeed / accelTime;
-        deccelForce = maxSpeed / deccelTime;
-    }
 
     private void Jump()
     {
@@ -157,11 +161,16 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = false;
             isJumpFalling = true;
+            hangTimeCounter = hangTime;
         }
 
-        if (isJumpFalling)
+        if (isJumpFalling && hangTimeCounter > 0f)
         {
             rb.gravityScale = gravityScale * 2.5f;
+        }
+        else
+        {
+            rb.gravityScale = gravityScale;
         }
 
     }
