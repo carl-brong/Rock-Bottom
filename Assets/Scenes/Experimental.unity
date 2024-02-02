@@ -1085,6 +1085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83951d99c7bf5664d9ff3602cebb5933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 2098255024}
   groundCheck: {fileID: 1943936402}
   groundLayer:
     serializedVersion: 2
@@ -1095,9 +1096,8 @@ MonoBehaviour:
   jumpHeight: 10
   coyoteTime: 0.2
   jumpBuffer: 0.2
-  hangTime: 0.18
   gravityScale: 2
-  terminalSpeed: 10
+  isGrappling: 0
 --- !u!120 &2098255029
 LineRenderer:
   serializedVersion: 2
@@ -1214,14 +1214,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38f95f3acc33044ea67fa01122b0af9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxGrappleLength: 10
-  grappleTime: 0.15
-  reelSpeed: 0.115
-  grappleLayer:
+  groundLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!232 &2098255031
-DistanceJoint2D:
+  rope: {fileID: 2098255029}
+  tether: {fileID: 2098255031}
+--- !u!231 &2098255031
+SpringJoint2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1229,7 +1228,7 @@ DistanceJoint2D:
   m_GameObject: {fileID: 2098255021}
   m_Enabled: 1
   serializedVersion: 4
-  m_EnableCollision: 0
+  m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -1237,9 +1236,10 @@ DistanceJoint2D:
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 1
-  m_Distance: 3.31
-  m_MaxDistanceOnly: 0
+  m_AutoConfigureDistance: 0
+  m_Distance: 2
+  m_DampingRatio: 1
+  m_Frequency: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
