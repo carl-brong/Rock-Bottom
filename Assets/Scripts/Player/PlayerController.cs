@@ -48,8 +48,9 @@ public class PlayerController : MonoBehaviour
         grapplingHook = GetComponent<GrapplingHook>();
         grapplingHook.enabled = false;
         isGrappling = false;
+        accelForce = maxSpeed / accelTime;
+        deccelForce = maxSpeed / deccelTime;
 
-        
     }
 
     // Update is called once per frame
@@ -90,11 +91,6 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private void OnValidate()
-    {
-        accelForce = maxSpeed / accelTime;
-        deccelForce = maxSpeed / deccelTime;
-    }
     private void Run()
     {
         float targetSpeed = maxSpeed * move_x;
