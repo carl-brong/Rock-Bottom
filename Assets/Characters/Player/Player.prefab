@@ -221,7 +221,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  minFall: 6.07
+  minFall: 4
 --- !u!114 &5072844331338286003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,12 +241,12 @@ MonoBehaviour:
   accelTime: 5
   deccelTime: 2
   maxSpeed: 11
-  jumpHeight: 8
+  jumpHeight: 16
   coyoteTime: 0.2
   jumpBuffer: 0.2
   hangTime: 0.3
-  gravityScale: 2
-  terminalSpeed: 11
+  gravityScale: 4
+  terminalSpeed: 15
 --- !u!114 &1817114247902633418
 MonoBehaviour:
   m_ObjectHideFlags: 0
