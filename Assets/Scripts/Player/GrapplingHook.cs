@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.HID;
 
 
 // Grapple Mechanic modified and tuned from below resources
