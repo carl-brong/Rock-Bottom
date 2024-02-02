@@ -1646,8 +1646,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5188982713968507446, guid: 1c988deb3d0ede04e81a690e12315151, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5188982713968507446, guid: 1c988deb3d0ede04e81a690e12315151, type: 3}
       propertyPath: m_GravityScale
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5188982713968507446, guid: 1c988deb3d0ede04e81a690e12315151, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5285809144266991657, guid: 1c988deb3d0ede04e81a690e12315151, type: 3}
       propertyPath: m_Name
