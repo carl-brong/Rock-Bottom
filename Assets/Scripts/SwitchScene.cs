@@ -5,21 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class SwitchScene : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb;
-    float rbX, rbY;
+    /*[SerializeField] private Rigidbody2D rb;
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-    }
+    }*/
     // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        rbX = rb.position.x;
-        rbY = rb.position.y;
-        if (Input.GetKeyDown(KeyCode.Tab))
+        Debug.Log("Collision detected with " + collision.gameObject.name);
+        if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("SurfaceChild");
-            rb.position = new Vector3(rbX, rbY);
+            SceneManager.LoadScene("Level1");
         }
+        
     }
+
+    
+     
 }
