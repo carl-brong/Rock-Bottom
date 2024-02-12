@@ -11,6 +11,7 @@ public class PlayerListenState : PlayerActionState
     public override void EnterState()
     {
         base.EnterState();
+        Debug.Log("Listen");
     }
 
     public override void ExitState()
@@ -26,5 +27,6 @@ public class PlayerListenState : PlayerActionState
     public override void Update()
     {
         base.Update();
+        if (Input.GetKeyDown(KeyCode.RightShift)) StateMachine.ChangeState(Player.AttackState);
     }
 }

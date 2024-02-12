@@ -66,7 +66,8 @@ public class Player : MonoBehaviour, IDamageable
     
     #region Layers
 
-    [HideInInspector] public int _groundLayer = 1 << 6;
+    [SerializeField] public LayerMask _groundLayer;
+    [SerializeField] private LayerMask _attackLayer;
 
     #endregion
 
@@ -145,6 +146,11 @@ public class Player : MonoBehaviour, IDamageable
     public bool OnGround()
     {
         return Physics2D.OverlapCircle(GroundCheck.position, 0.2f, _groundLayer);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.GetChild(1).position, 0.2f);
     }
 
     #region Health Functions
