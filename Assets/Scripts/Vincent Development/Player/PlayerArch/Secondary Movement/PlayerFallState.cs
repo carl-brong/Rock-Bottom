@@ -14,14 +14,14 @@ public class PlayerFallState : PlayerSecondaryMovementState
 
     public override void EnterState()
     {
-        Player.Rb.gravityScale *= Player.fallModifier;
-        _fallSpeed = -Player.maxVerticalSpeed;
+        Player.Rb.gravityScale *= Player.Data.fallModifier;
+        _fallSpeed = -Player.Data.maxVerticalSpeed;
         Player.Anim.SetBool("isFalling", true);
     }
 
     public override void ExitState()
     {
-        Player.Rb.gravityScale /= Player.fallModifier;
+        Player.Rb.gravityScale /= Player.Data.fallModifier;
         Player.Anim.SetBool("isFalling", false);
     }
 
@@ -33,7 +33,7 @@ public class PlayerFallState : PlayerSecondaryMovementState
     public override void Update()
     {
         _jumpBufferCounter -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Space)) _jumpBufferCounter = Player.jumpBuffer;
+        if (Input.GetKeyDown(KeyCode.Space)) _jumpBufferCounter = Player.Data.jumpBuffer;
         if (_jumpBufferCounter > 0 && Player.OnGround())
         {
             StateMachine.ChangeState(StateMachine.PreviousState);
@@ -41,11 +41,11 @@ public class PlayerFallState : PlayerSecondaryMovementState
         }
         else if (Player.OnGround()) StateMachine.ChangeState(Player.SecondaryIdleState);
 
-        if (Input.GetKey(KeyCode.S)) _fallSpeed = Player.maxVerticalSpeed * -2f;
-        if (Input.GetKeyUp(KeyCode.S)) _fallSpeed = -Player.maxVerticalSpeed;
+        if (Input.GetKey(KeyCode.S)) _fallSpeed = Player.Data.maxVerticalSpeed * -2f;
+        if (Input.GetKeyUp(KeyCode.S)) _fallSpeed = -Player.Data.maxVerticalSpeed;
 
-        if (Input.GetKey(KeyCode.W)) _fallSpeed = Player.maxVerticalSpeed * -0.5f;
-        if (Input.GetKeyUp(KeyCode.W)) _fallSpeed = -Player.maxVerticalSpeed;
+        if (Input.GetKey(KeyCode.W)) _fallSpeed = Player.Data.maxVerticalSpeed * -0.5f;
+        if (Input.GetKeyUp(KeyCode.W)) _fallSpeed = -Player.Data.maxVerticalSpeed;
 
     }
 }

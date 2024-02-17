@@ -29,34 +29,9 @@ public class Player : MonoBehaviour, IDamageable
     public Animator Anim { get; private set; }
 
     #endregion
-
-    #region Primary Movement Variables
-
-    [Header("Primary Movement Variables")]
-    public float maxHorizontalSpeed;
-    public float maxVerticalSpeed;
-    public float accelerationTime;
-    public float airAccelerationTime;
-    [HideInInspector] public float accelerationForce;
-    [HideInInspector] public float airAccelerationForce;
-    public float decelerationTIme;
-    public float airDecelerationTIme;
-    [HideInInspector] public float decelerationForce;
-    [HideInInspector] public float airDecelerationForce;
-
-    #endregion
-
-    #region Secondary Movement Variables
-
-    [Header("Secondary Movement Variables")]
-    public float jumpModifier;
-    public float jumpBuffer = 0.2f;
-    public float coyoteTime = 0.2f;
-    public float fallModifier;
-
-    #endregion
-
+    
     #region Health Variables
+    
     public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
 
@@ -68,6 +43,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private LayerMask _attackLayer;
 
     #endregion
+
+    public PlayerData Data;
 
     private void Awake()
     {
@@ -101,12 +78,7 @@ public class Player : MonoBehaviour, IDamageable
         Anim = GetComponent<Animator>();
 
         #endregion
-
-
-        accelerationForce = maxHorizontalSpeed / accelerationTime;
-        airAccelerationForce = maxHorizontalSpeed / airAccelerationTime;
-        decelerationForce = maxHorizontalSpeed / decelerationTIme;
-        airDecelerationForce = maxHorizontalSpeed / airDecelerationTIme;
+        
     }
 
     #region Updaters
@@ -134,13 +106,6 @@ public class Player : MonoBehaviour, IDamageable
         PrimaryMovementStateMachine.CurrentState.FixedUpdate();
         SecondaryMovementStateMachine.CurrentState.FixedUpdate();
         ActionStateMachine.CurrentState.FixedUpdate();
-    }
-    private void OnValidate()
-    {
-        accelerationForce = maxHorizontalSpeed / accelerationTime;
-        airAccelerationForce = maxHorizontalSpeed / airAccelerationTime;
-        decelerationForce = maxHorizontalSpeed / decelerationTIme;
-        airDecelerationForce = maxHorizontalSpeed / airDecelerationTIme;
     }
 
     #endregion

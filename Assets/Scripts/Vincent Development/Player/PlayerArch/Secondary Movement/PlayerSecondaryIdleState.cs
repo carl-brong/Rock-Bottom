@@ -26,7 +26,7 @@ public class PlayerSecondaryIdleState : PlayerSecondaryMovementState
     public override void Update()
     {
         _coyoteCounter -= Time.deltaTime;
-        if (Player.OnGround()) _coyoteCounter = Player.coyoteTime;
+        if (Player.OnGround()) _coyoteCounter = Player.Data.coyoteTime;
         if (Input.GetKeyDown(KeyCode.Space) && _coyoteCounter > 0) StateMachine.ChangeState(Player.JumpState);
         if (Input.GetKey(KeyCode.S) && Player.OnGround()) StateMachine.ChangeState(Player.CrouchState);
         if (!Player.OnGround() && Player.Rb.velocity.y < Mathf.Epsilon) StateMachine.ChangeState(Player.FallState);

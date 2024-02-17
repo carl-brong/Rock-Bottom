@@ -14,7 +14,7 @@ public class PlayerJumpState : PlayerSecondaryMovementState
     {
         Player.Anim.SetBool("isJumping", true);
         _jumpReleased = false;
-        Player.Rb.velocity = new Vector2(Player.Rb.velocity.x, Player.jumpModifier);
+        Player.Rb.velocity = new Vector2(Player.Rb.velocity.x, Player.Data.jumpModifier);
     }
 
     public override void ExitState()

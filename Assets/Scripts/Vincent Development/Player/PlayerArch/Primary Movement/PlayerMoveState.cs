@@ -57,9 +57,9 @@ public class PlayerMoveState : PlayerPrimaryMovementState
     
     private void Move()
     {
-        var target = _moveX * Player.maxHorizontalSpeed;
-        var accel = Player.OnGround() ? Player.accelerationForce : Player.airAccelerationForce;
-        var decel = Player.OnGround() ? Player.decelerationForce : Player.airDecelerationForce;
+        var target = _moveX * Player.Data.maxHorizontalSpeed;
+        var accel = Player.OnGround() ? Player.Data.accelerationForce : Player.Data.airAccelerationForce;
+        var decel = Player.OnGround() ? Player.Data.decelerationForce : Player.Data.airDecelerationForce;
         float clampedForce;
         var velocity = Player.Rb.velocity;
         switch (_moveX)
