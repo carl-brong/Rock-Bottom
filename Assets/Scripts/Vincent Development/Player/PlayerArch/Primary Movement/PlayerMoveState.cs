@@ -84,6 +84,6 @@ public class PlayerMoveState : PlayerPrimaryMovementState
 
     private bool isMoving()
     {
-        return Mathf.Abs(Player.Rb.velocity.x) > 0;
+        return Mathf.Abs(Player.Rb.velocity.x) > 0.01f;
     }
 }

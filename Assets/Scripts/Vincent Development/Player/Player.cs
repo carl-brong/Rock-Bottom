@@ -152,7 +152,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.GetChild(1).position, 0.2f);
+        Gizmos.DrawWireSphere(transform.GetChild(0).position, 0.2f);
     }
 
     #region Health Functions
