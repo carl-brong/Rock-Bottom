@@ -13,23 +13,18 @@ public class PlayerSecondaryIdleState : PlayerSecondaryMovementState
 
     public override void EnterState()
     {
-        base.EnterState();
-        Debug.Log("Secondary Idle");
     }
 
     public override void ExitState()
     {
-        base.ExitState();
     }
 
     public override void FixedUpdate()
     {
-        base.FixedUpdate();
     }
 
     public override void Update()
     {
-        base.Update();
         _coyoteCounter -= Time.deltaTime;
         if (Player.OnGround()) _coyoteCounter = Player.coyoteTime;
         if (Input.GetKeyDown(KeyCode.Space) && _coyoteCounter > 0) StateMachine.ChangeState(Player.JumpState);

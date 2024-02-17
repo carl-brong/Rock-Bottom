@@ -14,27 +14,24 @@ public class PlayerFallState : PlayerSecondaryMovementState
 
     public override void EnterState()
     {
-        base.EnterState();
-        Debug.Log("Fall");
         Player.Rb.gravityScale *= Player.fallModifier;
         _fallSpeed = -Player.maxVerticalSpeed;
+        Player.Anim.SetBool("isFalling", true);
     }
 
     public override void ExitState()
     {
-        base.ExitState();
         Player.Rb.gravityScale /= Player.fallModifier;
+        Player.Anim.SetBool("isFalling", false);
     }
 
     public override void FixedUpdate()
     {
-        base.FixedUpdate();
         Player.Rb.velocity = new Vector2(Player.Rb.velocity.x, Mathf.Max(Player.Rb.velocity.y, _fallSpeed));
     }
 
     public override void Update()
     {
-        base.Update();
         _jumpBufferCounter -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Space)) _jumpBufferCounter = Player.jumpBuffer;
         if (_jumpBufferCounter > 0 && Player.OnGround())

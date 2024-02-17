@@ -12,17 +12,16 @@ public class PlayerCrouchState : PlayerSecondaryMovementState
 
     public override void EnterState()
     {
-        base.EnterState();
-        Debug.Log("Crouch");
         Player.Bc.size = new Vector2(Player.Bc.size.x, Player.Bc.size.y * 0.5f);
         Player.Bc.offset = new Vector2(Player.Bc.offset.x, Player.Bc.offset.y - 0.25f);
+        Player.Anim.SetBool("isCrouching", true);
     }
 
     public override void ExitState()
     {
-        base.ExitState();
         Player.Bc.size = new Vector2(Player.Bc.size.x, Player.Bc.size.y * 2f);
         Player.Bc.offset = new Vector2(Player.Bc.offset.x, Player.Bc.offset.y + 0.25f);
+        Player.Anim.SetBool("isCrouching", false);
     }
 
     public override void FixedUpdate()
@@ -32,9 +31,9 @@ public class PlayerCrouchState : PlayerSecondaryMovementState
 
     public override void Update()
     {
-        base.Update();
-        if (Input.GetKeyUp(KeyCode.S)) StateMachine.ChangeState(StateMachine.PreviousState);
+        if (Player.Controls.actions["Crouch"].WasReleasedThisFrame()) StateMachine.ChangeState(StateMachine.PreviousState);
         if (!Player.OnGround()) StateMachine.ChangeState(StateMachine.PreviousState);
-        if (Input.GetKeyDown(KeyCode.Space)) StateMachine.ChangeState(Player.JumpState);
+        if (Player.Controls.actions["Jump"].WasPressedThisFrame()) StateMachine.ChangeState(Player.JumpState);
     }
+    
 }

@@ -1,34 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour, IDamageable
 {
     #region State Machine Variables
 
-    public StateMachine<PlayerPrimaryMovementState> PrimaryMovementStateMachine { get; set; }
-    public StateMachine<PlayerSecondaryMovementState> SecondaryMovementStateMachine { get; set; }
-    public StateMachine<PlayerActionState> ActionStateMachine { get; set; }
-    public PlayerPrimaryIdleState PrimaryIdleState { get; set; }
-    public PlayerSecondaryIdleState SecondaryIdleState { get; set; }
-    public PlayerMoveState MoveState { get; set; }
-    public PlayerListenState ListenState { get; set; }
-    public PlayerJumpState JumpState { get; set; }
-    public PlayerFallState FallState { get; set; }
-    public PlayerAttackState AttackState { get; set; }
-    public PlayerCrouchState CrouchState { get; set; }
-
-
+    public StateMachine<PlayerPrimaryMovementState> PrimaryMovementStateMachine { get; private set; }
+    public StateMachine<PlayerSecondaryMovementState> SecondaryMovementStateMachine { get; private set; }
+    public StateMachine<PlayerActionState> ActionStateMachine { get; private set; }
+    public PlayerPrimaryIdleState PrimaryIdleState { get; private set; }
+    public PlayerSecondaryIdleState SecondaryIdleState { get; private set; }
+    public PlayerMoveState MoveState { get; private set; }
+    public PlayerListenState ListenState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
+    public PlayerFallState FallState { get; private set; }
+    public PlayerAttackState AttackState { get; private set; }
+    public PlayerCrouchState CrouchState { get; private set; }
+    
     #endregion
 
     #region GameObject Components
 
-    public Rigidbody2D Rb { get; set; }
-    public BoxCollider2D Bc { get; set; }
-    private Transform GroundCheck { get; set; }
+    public Rigidbody2D Rb { get; private set; }
+    public BoxCollider2D Bc { get; private set; }
+    public Transform GroundCheck { get; set; }
+    public PlayerInput Controls { get; private set; }
+    public Animator Anim { get; private set; }
 
     #endregion
 
@@ -41,10 +39,10 @@ public class Player : MonoBehaviour, IDamageable
     public float airAccelerationTime;
     [HideInInspector] public float accelerationForce;
     [HideInInspector] public float airAccelerationForce;
-    public float deccelerationTIme;
-    public float airDeccelerationTIme;
-    [HideInInspector] public float deccelerationForce;
-    [HideInInspector] public float airDeccelerationForce;
+    public float decelerationTIme;
+    public float airDecelerationTIme;
+    [HideInInspector] public float decelerationForce;
+    [HideInInspector] public float airDecelerationForce;
 
     #endregion
 
@@ -99,14 +97,16 @@ public class Player : MonoBehaviour, IDamageable
         Rb = GetComponent<Rigidbody2D>();
         Bc = GetComponent<BoxCollider2D>();
         GroundCheck = transform.GetChild(0);
+        Controls = GetComponent<PlayerInput>();
+        Anim = GetComponent<Animator>();
 
         #endregion
 
 
         accelerationForce = maxHorizontalSpeed / accelerationTime;
         airAccelerationForce = maxHorizontalSpeed / airAccelerationTime;
-        deccelerationForce = maxHorizontalSpeed / deccelerationTIme;
-        airDeccelerationForce = maxHorizontalSpeed / airDeccelerationTIme;
+        decelerationForce = maxHorizontalSpeed / decelerationTIme;
+        airDecelerationForce = maxHorizontalSpeed / airDecelerationTIme;
     }
 
     #region Updaters
@@ -125,6 +125,8 @@ public class Player : MonoBehaviour, IDamageable
         PrimaryMovementStateMachine.CurrentState.Update();
         SecondaryMovementStateMachine.CurrentState.Update();
         ActionStateMachine.CurrentState.Update();
+        
+        Anim.SetBool("isGrounded", OnGround());
     }
 
     private void FixedUpdate()
@@ -137,8 +139,8 @@ public class Player : MonoBehaviour, IDamageable
     {
         accelerationForce = maxHorizontalSpeed / accelerationTime;
         airAccelerationForce = maxHorizontalSpeed / airAccelerationTime;
-        deccelerationForce = maxHorizontalSpeed / deccelerationTIme;
-        airDeccelerationForce = maxHorizontalSpeed / airDeccelerationTIme;
+        decelerationForce = maxHorizontalSpeed / decelerationTIme;
+        airDecelerationForce = maxHorizontalSpeed / airDecelerationTIme;
     }
 
     #endregion
