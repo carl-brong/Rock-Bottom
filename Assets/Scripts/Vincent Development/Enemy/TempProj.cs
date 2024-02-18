@@ -1,14 +1,15 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TempProj : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public float power;
+    public Vector2 dir;
     
     // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -26,12 +27,12 @@ public class TempProj : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = Vector2.right * 8;
+        rb.velocity = dir * power;
     }
 
     private IEnumerator LifeTime()
     {
-        yield return new WaitForSeconds(2.1f);
+        yield return new WaitForSeconds(2f);
         ObjectPoolManager.ReturnObjectToPool(gameObject);
     }
 }

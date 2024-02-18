@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -20,7 +21,7 @@ public class Player : MonoBehaviour, IDamageable
     
     #endregion
 
-    #region GameObject Components
+    #region GameObject Components   
 
     public Rigidbody2D Rb { get; private set; }
     public BoxCollider2D Bc { get; private set; }
@@ -31,9 +32,10 @@ public class Player : MonoBehaviour, IDamageable
     #endregion
     
     #region Health Variables
-    
-    public float MaxHealth { get; set; }
+
+    public float MaxHealth { get; set; } = 20f;
     public float CurrentHealth { get; set; }
+    public static event Action<float> PlayerHealthChangeEvent;
 
     #endregion
     
@@ -89,6 +91,8 @@ public class Player : MonoBehaviour, IDamageable
         PrimaryMovementStateMachine.Initialize(PrimaryIdleState);
         SecondaryMovementStateMachine.Initialize(SecondaryIdleState);
         ActionStateMachine.Initialize(ListenState);
+        CurrentHealth = MaxHealth;
+        LoseHealth(2);
     }
 
     // Update is called once per frame
@@ -125,12 +129,21 @@ public class Player : MonoBehaviour, IDamageable
     public void LoseHealth(float amount)
     {
         CurrentHealth -= amount;
-        if (CurrentHealth < 0) Die();
+        Anim.SetTrigger("Hurt");
+        if (CurrentHealth < 0)
+        {
+            Die();
+        }
+        else
+        {
+            PlayerHealthChangeEvent?.Invoke(CurrentHealth);
+        }
     }
 
     public void HealHealth(float amount)
     {
         CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth);
+        PlayerHealthChangeEvent?.Invoke(CurrentHealth);
     }
 
     public void Die()
