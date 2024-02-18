@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -152,4 +153,9 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     #endregion
+
+    private void Test(float s)
+    {
+        Debug.Log(s);
+    }
 }

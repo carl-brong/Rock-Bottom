@@ -1,0 +1,34 @@
+{
+    "name": "TestInput",
+    "maps": [
+        {
+            "name": "Test",
+            "id": "90ecfde9-c08f-4ba3-a120-82b4cfde0e28",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Button",
+                    "id": "b4e62d50-86ea-4757-b722-51a75d453033",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "215b18c6-55bf-4ee1-a6c9-9a97d7f96615",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

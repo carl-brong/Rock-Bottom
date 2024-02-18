@@ -8,6 +8,11 @@ public class PlayerHealthBar : MonoBehaviour
         Player.PlayerHealthChangeEvent += HandleHealthChange;
     }
 
+    private void OnApplicationQuit()
+    {
+        Player.PlayerHealthChangeEvent -= HandleHealthChange;
+    }
+
     private void HandleHealthChange(float currentHealth) 
     {
         Debug.Log(currentHealth);    
