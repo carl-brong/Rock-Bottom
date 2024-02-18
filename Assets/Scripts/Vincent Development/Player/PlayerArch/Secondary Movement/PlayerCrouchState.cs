@@ -8,6 +8,7 @@ public class PlayerCrouchState : PlayerSecondaryMovementState
 
     public PlayerCrouchState(Player player, StateMachine<PlayerSecondaryMovementState> stateMachine) : base(player, stateMachine)
     {
+        
     }
 
     public override void EnterState()
@@ -31,9 +32,9 @@ public class PlayerCrouchState : PlayerSecondaryMovementState
 
     public override void Update()
     {
-        if (Player.Controls.actions["Crouch"].WasReleasedThisFrame()) StateMachine.ChangeState(StateMachine.PreviousState);
+        //if (Player.Controls.actions["Crouch"].WasReleasedThisFrame()) StateMachine.ChangeState(StateMachine.PreviousState);
         if (!Player.OnGround()) StateMachine.ChangeState(StateMachine.PreviousState);
-        if (Player.Controls.actions["Jump"].WasPressedThisFrame()) StateMachine.ChangeState(Player.JumpState);
+        //if (Player.Controls.actions["Jump"].WasPressedThisFrame()) StateMachine.ChangeState(Player.JumpState);
     }
     
 }

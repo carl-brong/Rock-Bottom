@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerPrimaryMovementState
 {
-    private float _moveX;
     private bool _isFacingRight = true;
+    private Vector2 _vel;
+    private float _moveX;
     
     public PlayerMoveState(Player player, StateMachine<PlayerPrimaryMovementState> stateMachine) : base(player, stateMachine)
     {
+        Player.input.MoveEvent += HandleInput;
     }
 
     public override void EnterState()
@@ -21,41 +23,41 @@ public class PlayerMoveState : PlayerPrimaryMovementState
 
     public override void FixedUpdate()
     {
-        Move();
+        Player.Rb.velocity = _vel;
     }
 
     public override void Update()
     {
-        GetInput();
-        Flip();
-        if (!isMoving())
+        _vel = CalculateVelocity();
+        Flip(_moveX);
+        if (NotMoving())
         {
             Player.Rb.velocity = new Vector2(0, Player.Rb.velocity.y);
             StateMachine.ChangeState(Player.PrimaryIdleState);
         }
     }
 
-    private void Flip()
+    private void Flip(float moveX)
     {
-        if (_isFacingRight && _moveX < 0)
+        if (_isFacingRight && moveX < 0)
         {
             Player.transform.localScale = new Vector3(-1, 1, 1);
             _isFacingRight = !_isFacingRight;
         }
 
-        if (!_isFacingRight && _moveX > 0)
+        if (!_isFacingRight && moveX > 0)
         {
             Player.transform.localScale = new Vector3(1, 1, 1);
             _isFacingRight = !_isFacingRight;
         }
     }
 
-    private void GetInput()
+    private void HandleInput(float moveX)
     {
-        _moveX = Player.Controls.actions["Move"].ReadValue<float>();
+        _moveX = moveX;
     }
-    
-    private void Move()
+
+    private Vector2 CalculateVelocity()
     {
         var target = _moveX * Player.Data.maxHorizontalSpeed;
         var accel = Player.OnGround() ? Player.Data.accelerationForce : Player.Data.airAccelerationForce;
@@ -65,25 +67,28 @@ public class PlayerMoveState : PlayerPrimaryMovementState
         switch (_moveX)
         {
             case > 0:
-                clampedForce = Mathf.Min(velocity.x + accel * Time.fixedDeltaTime, target);
+                clampedForce = Mathf.Min(velocity.x + accel * Time.deltaTime, target);
+                clampedForce = clampedForce < 0 ? -clampedForce : clampedForce;
                 velocity = new Vector2(clampedForce, velocity.y);
                 break;
             case < 0:
-                clampedForce = Mathf.Max(velocity.x - accel * Time.fixedDeltaTime, target);
+                clampedForce = Mathf.Max(velocity.x - accel * Time.deltaTime, target);
+                clampedForce = clampedForce > 0 ? -clampedForce : clampedForce;
                 velocity = new Vector2(clampedForce, velocity.y);
                 break;
             default:
                 clampedForce = velocity.x < 0
-                    ? Mathf.Min(velocity.x + decel * Time.fixedDeltaTime, 0)
-                    : Mathf.Max(velocity.x - decel * Time.fixedDeltaTime, 0);
+                    ? Mathf.Min(velocity.x + decel * Time.deltaTime, 0)
+                    : Mathf.Max(velocity.x - decel * Time.deltaTime, 0);
                 velocity = new Vector2(clampedForce, velocity.y);
                 break;
         }
-        Player.Rb.velocity = velocity;
+
+        return velocity;
     }
 
-    private bool isMoving()
+    private bool NotMoving()
     {
-        return Mathf.Abs(Player.Rb.velocity.x) > 0.01f;
+        return Mathf.Abs(Player.Rb.velocity.x) < 0.01f && _moveX == 0;
     }
 }

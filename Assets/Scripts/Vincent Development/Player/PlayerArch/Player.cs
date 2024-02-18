@@ -27,7 +27,7 @@ public class Player : MonoBehaviour, IDamageable
     public Rigidbody2D Rb { get; private set; }
     public BoxCollider2D Bc { get; private set; }
     public Transform GroundCheck { get; set; }
-    public PlayerInput Controls { get; private set; }
+    public InputReader input;
     public Animator Anim { get; private set; }
 
     #endregion
@@ -77,7 +77,6 @@ public class Player : MonoBehaviour, IDamageable
         Rb = GetComponent<Rigidbody2D>();
         Bc = GetComponent<BoxCollider2D>();
         GroundCheck = transform.GetChild(0);
-        Controls = GetComponent<PlayerInput>();
         Anim = GetComponent<Animator>();
 
         #endregion
