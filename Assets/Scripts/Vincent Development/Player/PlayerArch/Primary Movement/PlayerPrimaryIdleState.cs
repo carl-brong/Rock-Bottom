@@ -9,11 +9,11 @@ public class PlayerPrimaryIdleState : PlayerPrimaryMovementState
         Player.input.MoveEvent += GetInput;
     }
 
-    private bool recvIn = false;
+    private bool _doMove = false;
     
     public override void Update()
     {
-        if (recvIn)
+        if (_doMove)
         {
             StateMachine.ChangeState(Player.MoveState);
         }
@@ -21,6 +21,6 @@ public class PlayerPrimaryIdleState : PlayerPrimaryMovementState
 
     private void GetInput(float val)
     {
-        recvIn = val != 0;
+        _doMove = val != 0;
     }
 }

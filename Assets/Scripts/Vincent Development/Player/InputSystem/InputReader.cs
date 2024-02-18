@@ -1,3 +1,5 @@
+using Cinemachine;
+using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -19,11 +21,16 @@ public class InputReader : ScriptableObject, PlayerInputScript.IGroundActions
     }
 
     public event UnityAction<float> MoveEvent = delegate { };
+    public event UnityAction JumpEvent = delegate { };
+    public event UnityAction JumpCancelEvent = delegate { };
+    public event UnityAction CrouchEvent = delegate { };
+    public event UnityAction CrouchCancelEvent = delegate { };
+    public event UnityAction<Vector2> AttackEvent = delegate { };
 
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.phase != InputActionPhase.Started)
+        if (context.phase is InputActionPhase.Performed or InputActionPhase.Canceled)
         {
             MoveEvent.Invoke(context.ReadValue<float>());
         }
@@ -31,17 +38,33 @@ public class InputReader : ScriptableObject, PlayerInputScript.IGroundActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        if (context.phase == InputActionPhase.Started)
+        {
+            JumpEvent.Invoke();
+        }
+
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            JumpCancelEvent.Invoke();
+        }
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        AttackEvent.Invoke(context.ReadValue<Vector2>());
     }
 
     public void OnCrouch(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        if (context.phase == InputActionPhase.Started)
+        {
+            CrouchEvent.Invoke();
+        }
+
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            CrouchCancelEvent.Invoke();
+        }
     }
 }
 

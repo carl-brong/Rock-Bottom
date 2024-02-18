@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerSecondaryMovementState
 {
-    private bool _jumpReleased;
     
     public PlayerJumpState(Player player, StateMachine<PlayerSecondaryMovementState> stateMachine) : base(player, stateMachine)
     {
+        Player.input.JumpCancelEvent += HandleJumpCancel;
     }
 
     public override void EnterState()
     {
         Player.Anim.SetBool("isJumping", true);
-        _jumpReleased = false;
         Player.Rb.velocity = new Vector2(Player.Rb.velocity.x, Player.Data.jumpModifier);
     }
 
@@ -22,18 +21,18 @@ public class PlayerJumpState : PlayerSecondaryMovementState
         Player.Anim.SetBool("isJumping", false);
     }
 
-    public override void FixedUpdate()
+    public override void Update()
     {
-        if (_jumpReleased)
+        if (Player.Rb.velocity.y < Mathf.Epsilon)
         {
-            Player.Rb.velocity = new Vector2(Player.Rb.velocity.x, Player.Rb.velocity.y * 0.5f);
-            _jumpReleased = false;
+            StateMachine.ChangeState(Player.FallState);
         }
     }
 
-    public override void Update()
+    private void HandleJumpCancel()
     {
-        if (Input.GetKeyUp(KeyCode.Space)) _jumpReleased = true; 
-        if (Player.Rb.velocity.y < Mathf.Epsilon) StateMachine.ChangeState(Player.FallState);
+        var velocity = Player.Rb.velocity;
+        velocity = new Vector2(velocity.x, velocity.y * 0.5f);
+        Player.Rb.velocity = velocity;
     }
 }

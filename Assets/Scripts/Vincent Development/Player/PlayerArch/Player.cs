@@ -116,12 +116,12 @@ public class Player : MonoBehaviour, IDamageable
 
     public bool OnGround()
     {
-        return Physics2D.OverlapCircle(GroundCheck.position, 0.2f, _groundLayer);
+        return Physics2D.OverlapCircle(GroundCheck.position, 0.15f, _groundLayer);
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.GetChild(0).position, 0.2f);
+        Gizmos.DrawWireSphere(transform.GetChild(0).position, 0.15f);
     }
 
     #region Health Functions

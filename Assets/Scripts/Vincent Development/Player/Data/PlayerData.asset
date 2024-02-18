@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHorizontalSpeed: 5
   maxVerticalSpeed: 11
-  accelerationTime: 0.1
+  accelerationTime: 0.035
   airAccelerationTime: 0.1
-  accelerationForce: 50
+  accelerationForce: 142.85715
   airAccelerationForce: 50
-  decelerationTIme: 0.1
+  decelerationTIme: 0.035
   airDecelerationTIme: 1
-  decelerationForce: 50
+  decelerationForce: 142.85715
   airDecelerationForce: 5
-  jumpModifier: 12
-  jumpBuffer: 0.2
+  jumpModifier: 8
+  jumpBuffer: 0.1
   coyoteTime: 0.2
   fallModifier: 2

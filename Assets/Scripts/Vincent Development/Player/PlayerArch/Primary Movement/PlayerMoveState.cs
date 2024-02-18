@@ -68,12 +68,12 @@ public class PlayerMoveState : PlayerPrimaryMovementState
         {
             case > 0:
                 clampedForce = Mathf.Min(velocity.x + accel * Time.deltaTime, target);
-                clampedForce = clampedForce < 0 ? -clampedForce : clampedForce;
+                clampedForce = clampedForce < 0 && Player.OnGround() ? -clampedForce : clampedForce;
                 velocity = new Vector2(clampedForce, velocity.y);
                 break;
             case < 0:
                 clampedForce = Mathf.Max(velocity.x - accel * Time.deltaTime, target);
-                clampedForce = clampedForce > 0 ? -clampedForce : clampedForce;
+                clampedForce = clampedForce > 0 && Player.OnGround() ? -clampedForce : clampedForce;
                 velocity = new Vector2(clampedForce, velocity.y);
                 break;
             default:

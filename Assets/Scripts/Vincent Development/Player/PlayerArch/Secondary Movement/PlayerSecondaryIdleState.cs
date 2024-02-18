@@ -9,26 +9,33 @@ public class PlayerSecondaryIdleState : PlayerSecondaryMovementState
 
     public PlayerSecondaryIdleState(Player player, StateMachine<PlayerSecondaryMovementState> stateMachine) : base(player, stateMachine)
     {
-    }
-
-    public override void EnterState()
-    {
-    }
-
-    public override void ExitState()
-    {
-    }
-
-    public override void FixedUpdate()
-    {
+        Player.input.JumpEvent += HandleJump;
+        Player.input.CrouchEvent += HandleCrouch;
     }
 
     public override void Update()
     {
         _coyoteCounter -= Time.deltaTime;
         if (Player.OnGround()) _coyoteCounter = Player.Data.coyoteTime;
-        if (Input.GetKeyDown(KeyCode.Space) && _coyoteCounter > 0) StateMachine.ChangeState(Player.JumpState);
-        if (Input.GetKey(KeyCode.S) && Player.OnGround()) StateMachine.ChangeState(Player.CrouchState);
-        if (!Player.OnGround() && Player.Rb.velocity.y < Mathf.Epsilon) StateMachine.ChangeState(Player.FallState);
+        if (_coyoteCounter < 0 && Player.Rb.velocity.y < Mathf.Epsilon) StateMachine.ChangeState(Player.FallState);
     }
+
+    private void HandleJump()
+    {
+        if (_coyoteCounter > 0)
+        {
+            _coyoteCounter = 0;
+            StateMachine.ChangeState(Player.JumpState);
+            
+        }
+    }
+
+    private void HandleCrouch()
+    {
+        if (Player.OnGround())
+        {
+            StateMachine.ChangeState(Player.CrouchState);
+        }
+    }
+    
 }
