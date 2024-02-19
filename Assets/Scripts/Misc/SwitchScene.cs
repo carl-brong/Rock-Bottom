@@ -5,19 +5,40 @@ using UnityEngine.SceneManagement;
 
 public class SwitchScene : MonoBehaviour
 {
-    /*[SerializeField] private Rigidbody2D rb;
-    
+    /*
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
     }*/
     // Update is called once per frame
     void OnTriggerEnter2D(Collider2D collision)
     {
+
         Debug.Log("Collision detected with " + collision.gameObject.name);
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("Level1");
+            if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("IntroScene"))
+            {
+                SceneManager.LoadScene("Level1");
+            }
+            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level1"))
+            {
+                SceneManager.LoadScene("Level2");
+            }
+            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level2"))
+            {
+                SceneManager.LoadScene("Level3");
+            }
+            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level3"))
+            {
+                SceneManager.LoadScene("Level4");
+            }
+            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level4"))
+            {
+                SceneManager.LoadScene("Level5");
+            }
+
         }
         
     }

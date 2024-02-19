@@ -1581,6 +1581,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2423068616203650727, guid: 1c988deb3d0ede04e81a690e12315151, type: 3}
+      propertyPath: maxVerticalSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3222593426836123379, guid: 1c988deb3d0ede04e81a690e12315151, type: 3}
       propertyPath: m_Enabled
       value: 1
