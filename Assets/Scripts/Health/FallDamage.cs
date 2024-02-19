@@ -45,7 +45,7 @@ public class FallDamage : MonoBehaviour
             fallDistance = startFall - transform.position.y;
             if (fallDistance > minFall)
             {
-                playerHealth.takeDamage((fallDistance- minFall) * 0.01f);
+                playerHealth.takeDamage((fallDistance- minFall) * 0.03f);
             }
             else
             {
