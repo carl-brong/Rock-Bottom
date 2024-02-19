@@ -15,9 +15,9 @@ MonoBehaviour:
   maxHorizontalSpeed: 5
   maxVerticalSpeed: 11
   accelerationTime: 0.035
-  airAccelerationTime: 0.1
+  airAccelerationTime: 0.07
   accelerationForce: 142.85715
-  airAccelerationForce: 50
+  airAccelerationForce: 71.42857
   decelerationTIme: 0.035
   airDecelerationTIme: 1
   decelerationForce: 142.85715

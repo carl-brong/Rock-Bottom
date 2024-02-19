@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4622295457779219474}
   - component: {fileID: 3367630124498306490}
   - component: {fileID: 1468604303007931687}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cannon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 999
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -113,7 +113,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 5
 --- !u!61 &3367630124498306490
 BoxCollider2D:
@@ -173,6 +173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePosition: {fileID: 3263523666234239418}
+  prefab: {fileID: 4101521336150440106, guid: bac59cbc8e19a3047bec6aee2233f089, type: 3}
+  folder: {fileID: 0}
+  _intervalOffset: 0
 --- !u!1 &642323629151851823
 GameObject:
   m_ObjectHideFlags: 0

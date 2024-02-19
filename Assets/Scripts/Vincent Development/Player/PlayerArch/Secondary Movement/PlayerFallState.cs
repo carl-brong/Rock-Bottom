@@ -54,6 +54,9 @@ public class PlayerFallState : PlayerSecondaryMovementState
 
     private void HandleJump()
     {
-        _jumpBufferCounter = Player.Data.jumpBuffer;
+        if (StateMachine.CurrentState == this)
+        {
+            _jumpBufferCounter = Player.Data.jumpBuffer;
+        }
     }
 }

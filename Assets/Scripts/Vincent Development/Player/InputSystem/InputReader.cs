@@ -51,7 +51,10 @@ public class InputReader : ScriptableObject, PlayerInputScript.IGroundActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        AttackEvent.Invoke(context.ReadValue<Vector2>());
+        if (context.phase == InputActionPhase.Started)
+        {
+            AttackEvent.Invoke(context.ReadValue<Vector2>());
+        }
     }
 
     public void OnCrouch(InputAction.CallbackContext context)

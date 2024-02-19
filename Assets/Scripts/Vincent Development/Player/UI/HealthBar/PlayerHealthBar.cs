@@ -1,16 +1,12 @@
 using System;
 using UnityEngine;
 
-public class PlayerHealthBar : MonoBehaviour
+[CreateAssetMenu(menuName = "HealthTracker")]
+public class PlayerHealthBar : ScriptableObject
 {
-    private void Awake()
+    private void OnEnable()
     {
         Player.PlayerHealthChangeEvent += HandleHealthChange;
-    }
-
-    private void OnApplicationQuit()
-    {
-        Player.PlayerHealthChangeEvent -= HandleHealthChange;
     }
 
     private void HandleHealthChange(float currentHealth) 

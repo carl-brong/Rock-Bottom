@@ -22,7 +22,7 @@ public class PlayerSecondaryIdleState : PlayerSecondaryMovementState
 
     private void HandleJump()
     {
-        if (_coyoteCounter > 0)
+        if (StateMachine.CurrentState == this && _coyoteCounter > 0)
         {
             _coyoteCounter = 0;
             StateMachine.ChangeState(Player.JumpState);

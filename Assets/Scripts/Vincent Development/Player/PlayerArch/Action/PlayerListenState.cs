@@ -6,22 +6,14 @@ public class PlayerListenState : PlayerActionState
 {
     public PlayerListenState(Player player, StateMachine<PlayerActionState> stateMachine) : base(player, stateMachine)
     {
+        Player.input.AttackEvent += HandleAttack;
     }
 
-    public override void EnterState()
+    private void HandleAttack(Vector2 _)
     {
-    }
-
-    public override void ExitState()
-    {
-    }
-
-    public override void FixedUpdate()
-    {
-    }
-
-    public override void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.RightShift)) StateMachine.ChangeState(Player.AttackState);
+        if (StateMachine.CurrentState == this)
+        {
+            StateMachine.ChangeState(Player.AttackState);
+        }
     }
 }

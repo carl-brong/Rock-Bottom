@@ -9,6 +9,7 @@ public class PlayerCrouchState : PlayerSecondaryMovementState
     public PlayerCrouchState(Player player, StateMachine<PlayerSecondaryMovementState> stateMachine) : base(player, stateMachine)
     {
         Player.input.CrouchCancelEvent += HandleCrouchCancel;
+        Player.input.JumpEvent += HandleJump;
     }
 
     public override void EnterState()

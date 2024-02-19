@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMoveState : PlayerPrimaryMovementState
@@ -14,6 +15,7 @@ public class PlayerMoveState : PlayerPrimaryMovementState
     public override void EnterState()
     {
         Player.Anim.SetBool("isMoving", true);
+        _vel = Player.Rb.velocity;
     }
 
     public override void ExitState()
@@ -91,4 +93,5 @@ public class PlayerMoveState : PlayerPrimaryMovementState
     {
         return Mathf.Abs(Player.Rb.velocity.x) < 0.01f && _moveX == 0;
     }
+    
 }

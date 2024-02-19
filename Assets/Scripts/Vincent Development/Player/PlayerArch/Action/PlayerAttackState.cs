@@ -12,23 +12,8 @@ public class PlayerAttackState : PlayerActionState
     public override void EnterState()
     {
         Player.Anim.SetTrigger("Attack");
+        Player.EnemyInRange();
         StateMachine.ChangeState(Player.ListenState);
     }
-
-    public override void ExitState()
-    {
-        base.ExitState();
-    }
-
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-    }
-
-    public override void Update()
-    {
-        base.Update();
-    }
-
     
 }

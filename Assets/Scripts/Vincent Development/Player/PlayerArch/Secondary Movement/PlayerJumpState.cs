@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerJumpState : PlayerSecondaryMovementState
@@ -31,8 +32,11 @@ public class PlayerJumpState : PlayerSecondaryMovementState
 
     private void HandleJumpCancel()
     {
-        var velocity = Player.Rb.velocity;
-        velocity = new Vector2(velocity.x, velocity.y * 0.5f);
-        Player.Rb.velocity = velocity;
+        if (StateMachine.CurrentState == this)
+        {
+            var velocity = Player.Rb.velocity;
+            velocity = new Vector2(velocity.x, velocity.y * 0.5f);
+            Player.Rb.velocity = velocity;
+        }
     }
 }

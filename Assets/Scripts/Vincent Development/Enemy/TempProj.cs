@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class TempProj : MonoBehaviour
     private Rigidbody2D rb;
     public float power;
     public Vector2 dir;
+    public static event Action<float> PlayerHit;
     
     // Start is called before the first frame update
 
@@ -34,5 +36,22 @@ public class TempProj : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         ObjectPoolManager.ReturnObjectToPool(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log(other.gameObject.layer);
+            PlayerHit?.Invoke(1);
+            StopCoroutine(LifeTime());
+            ObjectPoolManager.ReturnObjectToPool(gameObject);
+        }
+
+        else if (other.gameObject.layer == 6)
+        {
+            StopCoroutine(LifeTime());
+            ObjectPoolManager.ReturnObjectToPool(gameObject);
+        }
     }
 }

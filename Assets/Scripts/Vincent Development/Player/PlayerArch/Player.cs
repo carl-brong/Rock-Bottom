@@ -93,6 +93,7 @@ public class Player : MonoBehaviour, IDamageable
         ActionStateMachine.Initialize(ListenState);
         CurrentHealth = MaxHealth;
         LoseHealth(2);
+        TempProj.PlayerHit += LoseHealth;
     }
 
     // Update is called once per frame
@@ -122,6 +123,7 @@ public class Player : MonoBehaviour, IDamageable
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.GetChild(0).position, 0.15f);
+        Gizmos.DrawWireSphere(transform.GetChild(5).position, 0.2f);
     }
 
     #region Health Functions
@@ -153,8 +155,15 @@ public class Player : MonoBehaviour, IDamageable
 
     #endregion
 
-    private void Test(float s)
+    public void EnemyInRange()
     {
-        Debug.Log(s);
+        var colliders = Physics2D.OverlapCircleAll(transform.GetChild(5).position, 0.2f);
+        foreach (Collider2D enemy in colliders)
+        {
+            if (enemy.gameObject.CompareTag("Enemy"))
+            {
+                Debug.Log($"Hit {enemy.gameObject.name}");
+            }
+        }
     }
 }

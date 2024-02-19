@@ -6,12 +6,13 @@ public class Cannon : MonoBehaviour
     [SerializeField] private Transform firePosition;
     [SerializeField] private GameObject prefab;
     [SerializeField] private Transform folder;
+    [SerializeField] private float _intervalOffset;
     
     
     // Start is called before the first frame update
     private void Start()
     {
-        StartCoroutine(Shoot());
+        StartCoroutine(WaitOffset(_intervalOffset));
     }
 
     // Update is called once per frame
@@ -23,8 +24,14 @@ public class Cannon : MonoBehaviour
     private IEnumerator Shoot()
     {
         yield return new WaitForSeconds(2);
-        ObjectPoolManager.SpawnObject(prefab, firePosition.position, firePosition.rotation, folder);
+        var obj = ObjectPoolManager.SpawnObject(prefab, firePosition.position, firePosition.rotation, folder);
+        obj.GetComponent<TempProj>().dir = new Vector2(transform.localScale.x, 0);
+        StartCoroutine(Shoot());
+    }
 
+    private IEnumerator WaitOffset(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
         StartCoroutine(Shoot());
     }
 }
