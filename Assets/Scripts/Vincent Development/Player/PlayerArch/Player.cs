@@ -1,8 +1,5 @@
 using System;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -94,6 +91,7 @@ public class Player : MonoBehaviour, IDamageable
         CurrentHealth = MaxHealth;
         LoseHealth(2);
         TempProj.PlayerHit += LoseHealth;
+        Spikes.HitSpike += LoseHealth;
     }
 
     // Update is called once per frame
@@ -123,7 +121,6 @@ public class Player : MonoBehaviour, IDamageable
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.GetChild(0).position, 0.15f);
-        Gizmos.DrawWireSphere(transform.GetChild(5).position, 0.2f);
     }
 
     #region Health Functions
@@ -131,13 +128,15 @@ public class Player : MonoBehaviour, IDamageable
     public void LoseHealth(float amount)
     {
         CurrentHealth -= amount;
-        Anim.SetTrigger("Hurt");
         if (CurrentHealth < 0)
         {
+            Anim.SetTrigger("Die");
+            PlayerHealthChangeEvent?.Invoke(CurrentHealth);
             Die();
         }
         else
         {
+            Anim.SetTrigger("Hurt");
             PlayerHealthChangeEvent?.Invoke(CurrentHealth);
         }
     }

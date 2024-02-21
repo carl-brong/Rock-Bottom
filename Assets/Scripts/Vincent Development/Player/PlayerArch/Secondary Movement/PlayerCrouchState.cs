@@ -16,14 +16,14 @@ public class PlayerCrouchState : PlayerSecondaryMovementState
     {
         Player.Bc.offset = new Vector2(Player.Bc.offset.x, Player.Bc.offset.y - 0.25f);
         Player.Bc.size = new Vector2(Player.Bc.size.x, Player.Bc.size.y * 0.5f);
-        Player.Anim.SetBool("isCrouching", true);
+        //Player.Anim.SetBool("isCrouching", true);
     }
 
     public override void ExitState()
     {
         Player.Bc.offset = new Vector2(Player.Bc.offset.x, Player.Bc.offset.y + 0.25f);
         Player.Bc.size = new Vector2(Player.Bc.size.x, Player.Bc.size.y * 2f);
-        Player.Anim.SetBool("isCrouching", false);
+        //Player.Anim.SetBool("isCrouching", false);
     }
 
     public override void FixedUpdate()

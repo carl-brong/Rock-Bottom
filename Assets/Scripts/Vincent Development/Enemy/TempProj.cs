@@ -42,7 +42,6 @@ public class TempProj : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log(other.gameObject.layer);
             PlayerHit?.Invoke(1);
             StopCoroutine(LifeTime());
             ObjectPoolManager.ReturnObjectToPool(gameObject);

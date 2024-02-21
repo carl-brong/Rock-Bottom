@@ -11,7 +11,7 @@ public class PlayerAttackState : PlayerActionState
 
     public override void EnterState()
     {
-        Player.Anim.SetTrigger("Attack");
+        //Player.Anim.SetTrigger("Attack");
         Player.EnemyInRange();
         StateMachine.ChangeState(Player.ListenState);
     }
