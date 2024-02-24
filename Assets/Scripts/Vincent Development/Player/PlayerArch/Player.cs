@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour, IDamageable
     #endregion
 
     public PlayerData Data;
+    private Vector3 startpos;
 
     private void Awake()
     {
@@ -77,7 +79,8 @@ public class Player : MonoBehaviour, IDamageable
         Anim = GetComponent<Animator>();
 
         #endregion
-        
+
+
     }
 
     #region Updaters
@@ -92,6 +95,8 @@ public class Player : MonoBehaviour, IDamageable
         LoseHealth(2);
         TempProj.PlayerHit += LoseHealth;
         Spikes.HitSpike += LoseHealth;
+
+        startpos = transform.position;
     }
 
     // Update is called once per frame
@@ -149,7 +154,6 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        // Implement Later
     }
 
     #endregion
