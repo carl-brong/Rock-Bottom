@@ -5,33 +5,34 @@ using UnityEngine.SceneManagement;
 
 public class SwitchTimelines : MonoBehaviour
 {
-    [SerializeField] GameObject grid1Parent;
-    [SerializeField] GameObject grid1;
-    [SerializeField] GameObject grid1BG;
-    [SerializeField] GameObject grid2Parent;
-    [SerializeField] GameObject grid2;
-    [SerializeField] GameObject grid2BG;
+
+    [SerializeField] GameObject Past;
+    [SerializeField] GameObject Present;
+    [SerializeField] AudioSource SwitchAudio;
     bool toggle = false;
     // Start is called before the first frame update
     void Start()
     {
-        grid1.SetActive(toggle);
-        grid1BG.SetActive(toggle);
-        grid2.SetActive(!toggle);
-        grid2BG.SetActive(!toggle);
+        Past.SetActive(toggle);
+        Present.SetActive(!toggle);
+        SwitchAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
+    private void OnMouseDown()
+    {
+        
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Return))
+
         {
             toggle = !toggle;
-            grid1.SetActive(toggle);
-            grid1BG.SetActive(toggle);
-            grid2.SetActive(!toggle);
-            grid2BG.SetActive(!toggle);
-            //SceneManager.LoadScene("Level1");
+        Past.SetActive(toggle);
+        Present.SetActive(!toggle);
+        SwitchAudio.Play(0);
+
         }
 
     }

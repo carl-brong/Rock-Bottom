@@ -19,7 +19,7 @@ TagManager:
   - GrappleLayer
   - BG
   - BadStuff
-  - Player
+  - 
   - 
   - 
   - 
@@ -42,12 +42,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Items
+    uniqueID: 2713944979
+    locked: 0
   - name: BACKGROUND
     uniqueID: 511023619
     locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: CameraSortingLayer
-    uniqueID: 1291879787
     locked: 0

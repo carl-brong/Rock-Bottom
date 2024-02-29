@@ -8,11 +8,12 @@ public class ReloadScene : MonoBehaviour
     // Start is called before the first frame update
 
     // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Input.GetKeyDown("r")){
-            SceneManager.LoadScene("Level1");
+        if (collision.gameObject.tag == "Player")
+        {
+
+            SceneManager.LoadScene("Demo Tutorial");
         }
-        
     }
 }
