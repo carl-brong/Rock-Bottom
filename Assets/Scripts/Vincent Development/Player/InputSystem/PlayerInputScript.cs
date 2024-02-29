@@ -62,6 +62,24 @@ public partial class @PlayerInputScript: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""167e11fa-cf82-424d-a663-2b88ac8429ed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""a01f7efb-6c9e-40bb-8b88-c3ac610c34cb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -163,44 +181,39 @@ public partial class @PlayerInputScript: IInputActionCollection2, IDisposable
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4435ac81-796a-4795-a0bd-30125330163c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""334606b8-5c23-4977-b54a-b67b4e0ff858"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
-            ""name"": ""InAir"",
-            ""id"": ""0eb44823-f9ec-46bc-bba4-d8022576d5cc"",
+            ""name"": ""UI"",
+            ""id"": ""9c67c86e-20da-44b0-ae65-be21dfe76177"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""832d6510-ab66-471f-8331-6b6d27350b91"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Jump"",
+                    ""name"": ""Resume"",
                     ""type"": ""Button"",
-                    ""id"": ""0a33d75c-00d2-4c4a-bf93-f936819b3360"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Attack"",
-                    ""type"": ""Value"",
-                    ""id"": ""3b1ef67a-a15f-41de-ba6f-66ee9cc071fd"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Fall"",
-                    ""type"": ""Button"",
-                    ""id"": ""0349618d-6f4c-4ca8-8f74-89ddadc62959"",
+                    ""id"": ""93ac4430-c2bc-46c6-b9e4-9920e9d6f3c4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -209,136 +222,15 @@ public partial class @PlayerInputScript: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""c60dc520-9ac9-4ed2-b2a1-8a24fa0c43be"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""71e79dec-21ad-4c64-8280-77ddb21fbce5"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""8e4c6867-ce52-40fd-a23c-1afd8c442e12"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
-                    ""id"": ""8ee7719d-65f3-4868-bdf8-b1859c6a020b"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""d431487f-7243-4812-82cd-2bb7577a7ea9"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""Resume"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""8ff520de-1258-4519-85f3-18d5cdd9a92e"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""99663600-37e6-41db-a3cb-008b65e388c5"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""504b61bb-937b-4b02-bb67-5c02180c852f"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""4efb30f7-8b24-4fcb-9c41-afa8d9bec371"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""dd9f6aef-20ad-410e-be6c-c505453e8636"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""f9c8184f-0009-4f8d-91a7-929985a37c20"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Fall"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""1f2914a1-3755-4595-af77-1c10d7ad911c"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Fall"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""b787c8b4-7019-4fdd-8ab6-96d33d1db22e"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Fall"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -351,12 +243,11 @@ public partial class @PlayerInputScript: IInputActionCollection2, IDisposable
         m_Ground_Jump = m_Ground.FindAction("Jump", throwIfNotFound: true);
         m_Ground_Attack = m_Ground.FindAction("Attack", throwIfNotFound: true);
         m_Ground_Crouch = m_Ground.FindAction("Crouch", throwIfNotFound: true);
-        // InAir
-        m_InAir = asset.FindActionMap("InAir", throwIfNotFound: true);
-        m_InAir_Move = m_InAir.FindAction("Move", throwIfNotFound: true);
-        m_InAir_Jump = m_InAir.FindAction("Jump", throwIfNotFound: true);
-        m_InAir_Attack = m_InAir.FindAction("Attack", throwIfNotFound: true);
-        m_InAir_Fall = m_InAir.FindAction("Fall", throwIfNotFound: true);
+        m_Ground_Pause = m_Ground.FindAction("Pause", throwIfNotFound: true);
+        m_Ground_Switch = m_Ground.FindAction("Switch", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Resume = m_UI.FindAction("Resume", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -422,6 +313,8 @@ public partial class @PlayerInputScript: IInputActionCollection2, IDisposable
     private readonly InputAction m_Ground_Jump;
     private readonly InputAction m_Ground_Attack;
     private readonly InputAction m_Ground_Crouch;
+    private readonly InputAction m_Ground_Pause;
+    private readonly InputAction m_Ground_Switch;
     public struct GroundActions
     {
         private @PlayerInputScript m_Wrapper;
@@ -430,6 +323,8 @@ public partial class @PlayerInputScript: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Ground_Jump;
         public InputAction @Attack => m_Wrapper.m_Ground_Attack;
         public InputAction @Crouch => m_Wrapper.m_Ground_Crouch;
+        public InputAction @Pause => m_Wrapper.m_Ground_Pause;
+        public InputAction @Switch => m_Wrapper.m_Ground_Switch;
         public InputActionMap Get() { return m_Wrapper.m_Ground; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -451,6 +346,12 @@ public partial class @PlayerInputScript: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+            @Switch.started += instance.OnSwitch;
+            @Switch.performed += instance.OnSwitch;
+            @Switch.canceled += instance.OnSwitch;
         }
 
         private void UnregisterCallbacks(IGroundActions instance)
@@ -467,6 +368,12 @@ public partial class @PlayerInputScript: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+            @Switch.started -= instance.OnSwitch;
+            @Switch.performed -= instance.OnSwitch;
+            @Switch.canceled -= instance.OnSwitch;
         }
 
         public void RemoveCallbacks(IGroundActions instance)
@@ -485,87 +392,62 @@ public partial class @PlayerInputScript: IInputActionCollection2, IDisposable
     }
     public GroundActions @Ground => new GroundActions(this);
 
-    // InAir
-    private readonly InputActionMap m_InAir;
-    private List<IInAirActions> m_InAirActionsCallbackInterfaces = new List<IInAirActions>();
-    private readonly InputAction m_InAir_Move;
-    private readonly InputAction m_InAir_Jump;
-    private readonly InputAction m_InAir_Attack;
-    private readonly InputAction m_InAir_Fall;
-    public struct InAirActions
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Resume;
+    public struct UIActions
     {
         private @PlayerInputScript m_Wrapper;
-        public InAirActions(@PlayerInputScript wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_InAir_Move;
-        public InputAction @Jump => m_Wrapper.m_InAir_Jump;
-        public InputAction @Attack => m_Wrapper.m_InAir_Attack;
-        public InputAction @Fall => m_Wrapper.m_InAir_Fall;
-        public InputActionMap Get() { return m_Wrapper.m_InAir; }
+        public UIActions(@PlayerInputScript wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Resume => m_Wrapper.m_UI_Resume;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(InAirActions set) { return set.Get(); }
-        public void AddCallbacks(IInAirActions instance)
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
         {
-            if (instance == null || m_Wrapper.m_InAirActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_InAirActionsCallbackInterfaces.Add(instance);
-            @Move.started += instance.OnMove;
-            @Move.performed += instance.OnMove;
-            @Move.canceled += instance.OnMove;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
-            @Attack.started += instance.OnAttack;
-            @Attack.performed += instance.OnAttack;
-            @Attack.canceled += instance.OnAttack;
-            @Fall.started += instance.OnFall;
-            @Fall.performed += instance.OnFall;
-            @Fall.canceled += instance.OnFall;
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @Resume.started += instance.OnResume;
+            @Resume.performed += instance.OnResume;
+            @Resume.canceled += instance.OnResume;
         }
 
-        private void UnregisterCallbacks(IInAirActions instance)
+        private void UnregisterCallbacks(IUIActions instance)
         {
-            @Move.started -= instance.OnMove;
-            @Move.performed -= instance.OnMove;
-            @Move.canceled -= instance.OnMove;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
-            @Attack.started -= instance.OnAttack;
-            @Attack.performed -= instance.OnAttack;
-            @Attack.canceled -= instance.OnAttack;
-            @Fall.started -= instance.OnFall;
-            @Fall.performed -= instance.OnFall;
-            @Fall.canceled -= instance.OnFall;
+            @Resume.started -= instance.OnResume;
+            @Resume.performed -= instance.OnResume;
+            @Resume.canceled -= instance.OnResume;
         }
 
-        public void RemoveCallbacks(IInAirActions instance)
+        public void RemoveCallbacks(IUIActions instance)
         {
-            if (m_Wrapper.m_InAirActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IInAirActions instance)
+        public void SetCallbacks(IUIActions instance)
         {
-            foreach (var item in m_Wrapper.m_InAirActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_InAirActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public InAirActions @InAir => new InAirActions(this);
+    public UIActions @UI => new UIActions(this);
     public interface IGroundActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnSwitch(InputAction.CallbackContext context);
     }
-    public interface IInAirActions
+    public interface IUIActions
     {
-        void OnMove(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
-        void OnFall(InputAction.CallbackContext context);
+        void OnResume(InputAction.CallbackContext context);
     }
 }

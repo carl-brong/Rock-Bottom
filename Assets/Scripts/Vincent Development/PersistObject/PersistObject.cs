@@ -3,18 +3,24 @@ using UnityEngine;
 
 public class PersistObject : MonoBehaviour
 {
-    private static PersistObject _instance;
+    private string objectID;
     
     private void Awake()
     {
-        if (_instance is not null)
+        objectID = name + gameObject.transform.position.ToString();
+    }
+
+    private void Start()
+    {
+        var objects = FindObjectsOfType<PersistObject>();
+        foreach (var obj in objects)
         {
-            Destroy(gameObject);
+            if (obj == this) break;
+            if (obj.objectID == objectID)
+            {
+                Destroy(gameObject);
+            }
         }
-        else
-        {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        DontDestroyOnLoad(gameObject);
     }
 }

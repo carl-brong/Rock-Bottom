@@ -13,7 +13,7 @@ public class PlayerPrimaryIdleState : PlayerPrimaryMovementState
     
     public override void Update()
     {
-        if (_doMove)
+        if (_doMove || Mathf.Abs(Player.Rb.velocity.x) > 0.01)
         {
             StateMachine.ChangeState(Player.MoveState);
         }

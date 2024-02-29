@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -46,7 +45,7 @@ public class Player : MonoBehaviour, IDamageable
     #endregion
 
     public PlayerData Data;
-    private Vector3 startpos;
+    public Vector3 startpos;
 
     private void Awake()
     {
@@ -92,16 +91,22 @@ public class Player : MonoBehaviour, IDamageable
         SecondaryMovementStateMachine.Initialize(SecondaryIdleState);
         ActionStateMachine.Initialize(ListenState);
         CurrentHealth = MaxHealth;
-        LoseHealth(2);
         TempProj.PlayerHit += LoseHealth;
         Spikes.HitSpike += LoseHealth;
 
         startpos = transform.position;
     }
 
+    private void OnDestroy()
+    {
+        TempProj.PlayerHit -= LoseHealth;
+        Spikes.HitSpike -= LoseHealth;
+    }
+
     // Update is called once per frame
     private void Update()
     {
+        Shader.SetGlobalVector("_Player", transform.position);
         PrimaryMovementStateMachine.CurrentState.Update();
         SecondaryMovementStateMachine.CurrentState.Update();
         ActionStateMachine.CurrentState.Update();
@@ -135,12 +140,14 @@ public class Player : MonoBehaviour, IDamageable
         CurrentHealth -= amount;
         if (CurrentHealth < 0)
         {
-            Anim.SetTrigger("Die");
+            CurrentHealth = 0;
+            Anim.SetFloat("CurrentHealth", CurrentHealth);
             PlayerHealthChangeEvent?.Invoke(CurrentHealth);
             Die();
         }
         else
         {
+            Anim.SetFloat("CurrentHealth", CurrentHealth);
             Anim.SetTrigger("Hurt");
             PlayerHealthChangeEvent?.Invoke(CurrentHealth);
         }
@@ -154,13 +161,14 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        GameManager.Instance.SetState(GameState.GameOver);
     }
 
     #endregion
 
     public void EnemyInRange()
     {
-        var colliders = Physics2D.OverlapCircleAll(transform.GetChild(5).position, 0.2f);
+        var colliders = Physics2D.OverlapCircleAll(transform.GetChild(1).position, 0.2f);
         foreach (Collider2D enemy in colliders)
         {
             if (enemy.gameObject.CompareTag("Enemy"))
