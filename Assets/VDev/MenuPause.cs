@@ -46,6 +46,19 @@ public class MenuPause : MonoBehaviour
         GameManager.Instance.SetState(GameState.Gameplay);
     }
 
+    public void Click()
+    {
+        if (GameManager.Instance.CurrentGameState == GameState.GameOver) return;
+        Log($"Popped {MenuController.Instance.PeekMenu().Menu.name}");
+        MenuController.Instance.PopMenu();
+        if (!MenuController.Instance.IsEmpty())
+        {
+            EventSystem.current.SetSelectedGameObject(MenuController.Instance.PeekMenu().FirstSelected);
+            return;
+        }
+        GameManager.Instance.SetState(GameState.Gameplay);
+    }
+
     private void Log(string message)
     {
         if (_debug) Debug.Log(message);
