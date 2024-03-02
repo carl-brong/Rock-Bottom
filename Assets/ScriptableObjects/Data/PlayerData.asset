@@ -12,16 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438cf47df3e6445e8df21febe88afaac, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  maxHorizontalSpeed: 10
+  maxHorizontalSpeed: 8
   maxVerticalSpeed: 15
   accelerationTime: 0.035
   airAccelerationTime: 0.07
-  accelerationForce: 285.7143
-  airAccelerationForce: 142.85715
-  decelerationTIme: 0.035
-  airDecelerationTIme: 1
-  decelerationForce: 285.7143
-  airDecelerationForce: 10
+  accelerationForce: 228.57143
+  airAccelerationForce: 114.28571
+  airDecelerationTIme: 0.5
+  airDecelerationForce: 16
   jumpModifier: 15
   jumpBuffer: 0.1
   coyoteTime: 0.2

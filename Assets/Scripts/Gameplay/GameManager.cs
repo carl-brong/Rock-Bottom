@@ -1,21 +1,20 @@
 
 //Source: https://www.youtube.com/watch?v=KPaEnLpu57s
 
+public enum GameState
+{
+    Gameplay,
+    Paused,
+    GameOver
+}
+
 public class GameManager
 {
     private static GameManager _instance;
 
     public static GameManager Instance
     {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new GameManager();
-            }
-            
-            return _instance;
-        }
+        get { return _instance ??= new GameManager(); }
     }
 
     public GameState CurrentGameState { get; private set; }

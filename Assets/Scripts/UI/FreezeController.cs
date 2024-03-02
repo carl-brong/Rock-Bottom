@@ -18,8 +18,8 @@ public class FreezeController : MonoBehaviour
         Debug.Log(newgamestate);
         Time.timeScale = newgamestate switch
         {
-            GameState.Gameplay => 1,
-            _ => 0
+            GameState.Paused => 0,
+            _ => 1
         };
     }
 }

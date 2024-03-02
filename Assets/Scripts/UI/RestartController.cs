@@ -12,6 +12,7 @@ public class RestartController : MonoBehaviour
         player.transform.position = player.startpos;
         player.HealHealth(player.MaxHealth);
         player.Anim.SetFloat("CurrentHealth", player.CurrentHealth);
+        MenuController.Instance.PopAllMenus();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.Instance.SetState(GameState.Gameplay);
     }

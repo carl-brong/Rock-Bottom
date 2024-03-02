@@ -10,9 +10,7 @@ public class PlayerData : ScriptableObject
     public float airAccelerationTime;
     [HideInInspector] public float accelerationForce;
     [HideInInspector] public float airAccelerationForce;
-    public float decelerationTIme;
     public float airDecelerationTIme;
-    [HideInInspector] public float decelerationForce;
     [HideInInspector] public float airDecelerationForce;
     
     [Header("Secondary Movement Variables")]
@@ -25,7 +23,6 @@ public class PlayerData : ScriptableObject
     {
         accelerationForce = maxHorizontalSpeed / accelerationTime;
         airAccelerationForce = maxHorizontalSpeed / airAccelerationTime;
-        decelerationForce = maxHorizontalSpeed / decelerationTIme;
         airDecelerationForce = maxHorizontalSpeed / airDecelerationTIme;
     }
 }
