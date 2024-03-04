@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SwitchScene : MonoBehaviour
 {
-    /*
+    
     private void Start()
     {
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
-    }*/
+    }
     // Update is called once per frame
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,11 +18,8 @@ public class SwitchScene : MonoBehaviour
         Debug.Log("Collision detected with " + collision.gameObject.name);
         if (collision.gameObject.tag == "Player")
         {
-            if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("IntroScene"))
-            {
-                SceneManager.LoadScene("Level1");
-            }
-            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level1"))
+  
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level1"))
             {
                 SceneManager.LoadScene("Level2");
             }

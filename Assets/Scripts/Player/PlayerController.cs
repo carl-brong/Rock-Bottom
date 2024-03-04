@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     private bool isJumping;
     private bool isJumpFalling;
 
-    private GrapplingHook grapplingHook;
+    //private GrapplingHook grapplingHook;
 
     // Start is called before the first frame update
     void Start()
@@ -45,8 +45,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = gravityScale;
 
-        grapplingHook = GetComponent<GrapplingHook>();
-        grapplingHook.enabled = false;
+        //grapplingHook = GetComponent<GrapplingHook>();
+        //grapplingHook.enabled = false;
         isGrappling = false;
         accelForce = maxSpeed / accelTime;
         deccelForce = maxSpeed / deccelTime;
@@ -66,12 +66,12 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            grapplingHook.enabled = true;
+            //grapplingHook.enabled = true;
             isGrappling = true;
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            grapplingHook.enabled = false;
+            //rapplingHook.enabled = false;
             isGrappling = false;
         }
         
@@ -81,11 +81,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrappling && !OnGround())
         {
-            grapplingHook.LockRope();
+           // grapplingHook.LockRope();
         }
         else
         {
-            grapplingHook.UnlockRope();
+            //grapplingHook.UnlockRope();
         }
         Run();
         
