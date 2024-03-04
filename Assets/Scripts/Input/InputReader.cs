@@ -4,27 +4,37 @@ using UnityEngine.InputSystem;
 
 
 [CreateAssetMenu(menuName = "Player Input Reader")]
-public class InputReader : ScriptableObject, PlayerInputScript.IGroundActions, PlayerInputScript.IUIActions
+public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenuActions
 {
-    private PlayerInputScript _input;
+    private GameInput _gameInput;
 
     private void OnEnable()
     {
-        if (_input == null)
+        if (_gameInput == null)
         {
-            _input = new PlayerInputScript();
-            _input.Ground.SetCallbacks(this);
-            _input.UI.SetCallbacks(this);
+            _gameInput = new GameInput();
+            _gameInput.Gameplay.SetCallbacks(this);
+            _gameInput.Menu.SetCallbacks(this);
         }
-        _input.UI.Disable();
-        _input.Ground.Enable();
-
-        GameManager.Instance.OnGameStateChanged += SwitchActionMap;
+        EnableGameplayControls();
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.OnGameStateChanged -= SwitchActionMap;
+        _gameInput.Gameplay.Disable();
+        _gameInput.Menu.Disable();
+    }
+    
+    public void EnableMenuControls()
+    {
+        _gameInput.Gameplay.Disable();
+        _gameInput.Menu.Enable();
+    }
+
+    public void EnableGameplayControls()
+    {
+        _gameInput.Gameplay.Enable();
+        _gameInput.Menu.Disable();
     }
 
     public event UnityAction<float> MoveEvent = delegate { };
@@ -34,27 +44,8 @@ public class InputReader : ScriptableObject, PlayerInputScript.IGroundActions, P
     public event UnityAction CrouchCancelEvent = delegate { };
     public event UnityAction<Vector2> AttackEvent = delegate { };
     public event UnityAction PauseEvent = delegate { };
-    public event UnityAction ResumeEvent = delegate { }; 
+    public event UnityAction PopMenuEvent = delegate { }; 
     public event UnityAction SwitchEvent = delegate { };
-
-    private void SwitchActionMap(GameState newGameState)
-    {
-        switch (newGameState)
-        {
-            case GameState.Gameplay:
-                _input.Ground.Enable();
-                _input.UI.Disable();
-                break;
-            case GameState.Paused:
-                _input.Ground.Disable();
-                _input.UI.Enable();
-                break;
-            case GameState.GameOver:
-                _input.Ground.Disable();
-                _input.UI.Disable();
-                break;
-        }
-    }
 
     #region IGroundActions
 
@@ -102,7 +93,7 @@ public class InputReader : ScriptableObject, PlayerInputScript.IGroundActions, P
 
     public void OnPause(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Performed)
         {
             PauseEvent.Invoke();
         }
@@ -120,11 +111,12 @@ public class InputReader : ScriptableObject, PlayerInputScript.IGroundActions, P
     
     #region IUIActions
     
-    public void OnResume(InputAction.CallbackContext context)
+
+    public void OnPop(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Performed)
         {
-            ResumeEvent.Invoke();
+            PopMenuEvent.Invoke();
         }
     }
 

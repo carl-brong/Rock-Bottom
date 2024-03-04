@@ -46,6 +46,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public PlayerData Data;
     public Vector3 startpos;
+    [SerializeField] private GameStateSO _gameStateManager;
 
     private void Awake()
     {
@@ -161,7 +162,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        GameManager.Instance.SetState(GameState.GameOver);
+        _gameStateManager.UpdateGameState(GameState.GameOver);
     }
 
     #endregion

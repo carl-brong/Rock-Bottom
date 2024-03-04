@@ -2,7 +2,7 @@
     "name": "PlayerInput",
     "maps": [
         {
-            "name": "Ground",
+            "name": "Gameplay",
             "id": "1a6f1443-dbb5-4d40-ad96-ab1f45d9d265",
             "actions": [
                 {
@@ -185,11 +185,11 @@
             ]
         },
         {
-            "name": "UI",
+            "name": "Menu",
             "id": "9c67c86e-20da-44b0-ae65-be21dfe76177",
             "actions": [
                 {
-                    "name": "Resume",
+                    "name": "Pop",
                     "type": "Button",
                     "id": "93ac4430-c2bc-46c6-b9e4-9920e9d6f3c4",
                     "expectedControlType": "Button",
@@ -206,7 +206,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Resume",
+                    "action": "Pop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

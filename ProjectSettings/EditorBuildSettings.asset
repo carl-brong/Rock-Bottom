@@ -5,13 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/IntroScene.unity
-    guid: 75c955407142bd345ad8232f2140dda2
-  - enabled: 0
-    path: Assets/Scenes/Level1.unity
-    guid: 70deeaea67c83924e8fba7fe6e97f05f
   - enabled: 1
-    path: Assets/Scenes/Vincent Development/With New Assets.unity
-    guid: 2d5d21fc2b946d649a421d0493ba188c
+    path: Assets/VDev/TitleScreen.unity
+    guid: 5898decf312bcec4eae84536b5e016e5
+  - enabled: 1
+    path: Assets/VDev/DevScene.unity
+    guid: 81d665c933c39684184fe81fe3f5e039
   m_configObjects: {}
