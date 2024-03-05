@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/VDev/TitleScreen.unity
     guid: 5898decf312bcec4eae84536b5e016e5
   - enabled: 1
-    path: Assets/VDev/DevScene.unity
-    guid: 81d665c933c39684184fe81fe3f5e039
+    path: Assets/VDev/Demo Copy.unity
+    guid: fa9de29b7a1254641af2e7f8c595879c
   m_configObjects: {}

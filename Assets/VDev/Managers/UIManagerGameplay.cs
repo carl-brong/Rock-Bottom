@@ -36,6 +36,13 @@ public class UIManagerGameplay : MonoBehaviour
         _gameStateManager.OnStateChange -= OpenGameOverMenu;
     }
 
+    #if UNITY_EDITOR
+    public void TestOpenPause()
+    {
+        OpenPauseMenu();
+    }
+    #endif
+    
     private void OpenPauseMenu()
     {
         // Input Reader Events

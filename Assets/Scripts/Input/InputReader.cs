@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(menuName = "Player Input Reader")]
 public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenuActions
 {
-    private GameInput _gameInput;
+    public GameInput _gameInput;
 
     private void OnEnable()
     {
@@ -17,6 +17,8 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
             _gameInput.Menu.SetCallbacks(this);
         }
         EnableGameplayControls();
+        
+        
     }
 
     private void OnDisable()
@@ -46,6 +48,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     public event UnityAction PauseEvent = delegate { };
     public event UnityAction PopMenuEvent = delegate { }; 
     public event UnityAction SwitchEvent = delegate { };
+
 
     #region IGroundActions
 
@@ -121,6 +124,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     }
 
     #endregion
+
     
 }
 
