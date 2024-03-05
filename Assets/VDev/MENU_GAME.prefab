@@ -14497,11 +14497,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14064518bea495eb93dd4213dae2c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftObject: {fileID: 8544850467073433440}
-  _rightObject: {fileID: 1786229713994082423}
-  _jumpObject: {fileID: 2851758944322639128}
-  _interactObject: {fileID: 6830367617761258535}
-  _swapObject: {fileID: 4085930648415268687}
+  _firstSelected: {fileID: 8544850467073433440}
+  _input: {fileID: 11400000, guid: 6d5430d6996ef46458b77c8c32ad8e62, type: 2}
+  _leftText: {fileID: 7702333586994210353}
+  _rightText: {fileID: 7780572893383588129}
+  _jumpText: {fileID: 5367610545623846370}
+  _crouchText: {fileID: 8981844324225047102}
+  _interactText: {fileID: 2308910266045455306}
+  _swapText: {fileID: 8704441759534258595}
 --- !u!1 &7121355135880255015
 GameObject:
   m_ObjectHideFlags: 0

@@ -85,5 +85,7 @@ public class ReBinder : MonoBehaviour
             action.bindings[_bindingIndex].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
         _bindingOperation.Dispose();
         _overlay.SetActive(false);
+        var rebinding = _input._gameInput.asset.SaveBindingOverridesAsJson();
+        PlayerPrefs.SetString("Bindings", rebinding);
     }
 }

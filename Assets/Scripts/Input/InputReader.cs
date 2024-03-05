@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -10,14 +11,18 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     private void OnEnable()
     {
+        var overrides = PlayerPrefs.GetString("Bindings");
+        
         if (_gameInput == null)
         {
             _gameInput = new GameInput();
+            if (!string.IsNullOrEmpty(overrides))
+                _gameInput.asset.LoadBindingOverridesFromJson(overrides);
             _gameInput.Gameplay.SetCallbacks(this);
             _gameInput.Menu.SetCallbacks(this);
         }
-        EnableGameplayControls();
         
+        EnableGameplayControls();
         
     }
 
@@ -44,10 +49,10 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     public event UnityAction JumpCancelEvent = delegate { };
     public event UnityAction CrouchEvent = delegate { };
     public event UnityAction CrouchCancelEvent = delegate { };
-    public event UnityAction<Vector2> AttackEvent = delegate { };
     public event UnityAction PauseEvent = delegate { };
     public event UnityAction PopMenuEvent = delegate { }; 
     public event UnityAction SwitchEvent = delegate { };
+    public event UnityAction InteractEvent = delegate { };
 
 
     #region IGroundActions
@@ -70,14 +75,6 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
         if (context.phase == InputActionPhase.Canceled)
         {
             JumpCancelEvent.Invoke();
-        }
-    }
-
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started)
-        {
-            AttackEvent.Invoke(context.ReadValue<Vector2>());
         }
     }
 
@@ -107,6 +104,14 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
         if (context.phase == InputActionPhase.Started)
         {
             SwitchEvent.Invoke();
+        }
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            InteractEvent.Invoke();
         }
     }
     

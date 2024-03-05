@@ -1,73 +1,51 @@
 
+using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class UIPauseOptionsControls : MonoBehaviour
 {
-    [SerializeField] private GameObject _leftObject, _rightObject, _jumpObject, _interactObject, _swapObject;
-    
-    private Button _leftButton, _rightButton, _jumpButton, _interactButton, _swapButton;
+    [SerializeField] private GameObject _firstSelected;
+    [SerializeField] private InputReader _input;
+    [SerializeField] private TMP_Text _leftText, _rightText, _jumpText, _crouchText, _interactText, _swapText;
 
-    
-    public event UnityAction<string> LeftKeyBindRequested = delegate { };
-    public event UnityAction<string> RightKeyBindRequested = delegate { };
-    public event UnityAction<string> JumpKeyBindRequested = delegate { };
-    public event UnityAction<string> InteractKeyBindRequested = delegate { };
-    public event UnityAction<string> SwapKeyBindRequested = delegate { };
+    private Button _first;
 
     private void Awake()
     {
-        _leftButton = _leftObject.GetComponent<Button>();
-        _rightButton = _rightObject.GetComponent<Button>();
-        _jumpButton = _jumpObject.GetComponent<Button>();
-        _interactButton = _interactObject.GetComponent<Button>();
-        _swapButton = _swapObject.GetComponent<Button>();
+        _first = _firstSelected.GetComponent<Button>();
     }
 
     private void OnEnable()
     {
-        _leftButton.onClick.AddListener(ChangeLeftKeyBind);
-        _rightButton.onClick.AddListener(ChangeRightKeyBind);
-        _jumpButton.onClick.AddListener(ChangeJumpKeyBind);
-        _interactButton.onClick.AddListener(ChangeInteractKeyBind);
-        _swapButton.onClick.AddListener(ChangeSwapKeyBind);
-        _leftButton.Select();
+        _first.Select();
     }
 
-    private void OnDisable()
+    private void Start()
     {
-        _leftButton.onClick.RemoveListener(ChangeLeftKeyBind);
-        _rightButton.onClick.RemoveListener(ChangeRightKeyBind);
-        _jumpButton.onClick.RemoveListener(ChangeJumpKeyBind);
-        _interactButton.onClick.RemoveListener(ChangeInteractKeyBind);
-        _swapButton.onClick.RemoveListener(ChangeSwapKeyBind);
+        _leftText.text = InputControlPath.ToHumanReadableString(
+            _input._gameInput.Gameplay.Move.bindings[1].effectivePath, 
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        _rightText.text = InputControlPath.ToHumanReadableString(
+            _input._gameInput.Gameplay.Move.bindings[2].effectivePath, 
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        _jumpText.text = InputControlPath.ToHumanReadableString(
+            _input._gameInput.Gameplay.Jump.bindings[0].effectivePath, 
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        _crouchText.text = InputControlPath.ToHumanReadableString(
+            _input._gameInput.Gameplay.Crouch.bindings[0].effectivePath, 
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        _interactText.text = InputControlPath.ToHumanReadableString(
+            _input._gameInput.Gameplay.Interact.bindings[0].effectivePath, 
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        _swapText.text = InputControlPath.ToHumanReadableString(
+            _input._gameInput.Gameplay.Switch.bindings[0].effectivePath, 
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
     }
-
-    private void ChangeLeftKeyBind()
-    {
-        LeftKeyBindRequested.Invoke("Left");
-    }
-
-    private void ChangeRightKeyBind()
-    {
-        RightKeyBindRequested.Invoke("Right");
-    }
-
-    private void ChangeJumpKeyBind()
-    {
-        JumpKeyBindRequested.Invoke("Jump");
-    }
-
-    private void ChangeInteractKeyBind()
-    {
-        InteractKeyBindRequested.Invoke("Interact");
-    }
-
-    private void ChangeSwapKeyBind()
-    {
-        SwapKeyBindRequested.Invoke("Swap");
-    }
-
 }

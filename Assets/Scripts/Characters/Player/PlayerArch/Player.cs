@@ -7,14 +7,11 @@ public class Player : MonoBehaviour, IDamageable
 
     public StateMachine<PlayerPrimaryMovementState> PrimaryMovementStateMachine { get; private set; }
     public StateMachine<PlayerSecondaryMovementState> SecondaryMovementStateMachine { get; private set; }
-    public StateMachine<PlayerActionState> ActionStateMachine { get; private set; }
     public PlayerPrimaryIdleState PrimaryIdleState { get; private set; }
     public PlayerSecondaryIdleState SecondaryIdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
-    public PlayerListenState ListenState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     public PlayerFallState FallState { get; private set; }
-    public PlayerAttackState AttackState { get; private set; }
     public PlayerCrouchState CrouchState { get; private set; }
     
     #endregion
@@ -64,11 +61,6 @@ public class Player : MonoBehaviour, IDamageable
         JumpState = new PlayerJumpState(this, SecondaryMovementStateMachine);
         FallState = new PlayerFallState(this, SecondaryMovementStateMachine);
 
-        // Action States
-        ActionStateMachine = new StateMachine<PlayerActionState>();
-        ListenState = new PlayerListenState(this, ActionStateMachine);
-        AttackState = new PlayerAttackState(this, ActionStateMachine);
-
         #endregion
 
         #region GameObject References
@@ -90,7 +82,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         PrimaryMovementStateMachine.Initialize(PrimaryIdleState);
         SecondaryMovementStateMachine.Initialize(SecondaryIdleState);
-        ActionStateMachine.Initialize(ListenState);
         CurrentHealth = MaxHealth;
         TempProj.PlayerHit += LoseHealth;
         Spikes.HitSpike += LoseHealth;
@@ -110,7 +101,6 @@ public class Player : MonoBehaviour, IDamageable
         Shader.SetGlobalVector("_Player", transform.position);
         PrimaryMovementStateMachine.CurrentState.Update();
         SecondaryMovementStateMachine.CurrentState.Update();
-        ActionStateMachine.CurrentState.Update();
         
         Anim.SetBool("isGrounded", OnGround());
     }
@@ -119,7 +109,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         PrimaryMovementStateMachine.CurrentState.FixedUpdate();
         SecondaryMovementStateMachine.CurrentState.FixedUpdate();
-        ActionStateMachine.CurrentState.FixedUpdate();
     }
 
     #endregion
@@ -166,16 +155,5 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     #endregion
-
-    public void EnemyInRange()
-    {
-        var colliders = Physics2D.OverlapCircleAll(transform.GetChild(1).position, 0.2f);
-        foreach (Collider2D enemy in colliders)
-        {
-            if (enemy.gameObject.CompareTag("Enemy"))
-            {
-                Debug.Log($"Hit {enemy.gameObject.name}");
-            }
-        }
-    }
+    
 }
