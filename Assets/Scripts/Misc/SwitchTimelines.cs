@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class SwitchTimelines : MonoBehaviour
     [SerializeField] GameObject Past;
     [SerializeField] GameObject Present;
     [SerializeField] AudioSource SwitchAudio;
+    [SerializeField] private InputReader _input;
     bool toggle = false;
     // Start is called before the first frame update
     void Start()
@@ -16,24 +18,20 @@ public class SwitchTimelines : MonoBehaviour
         Past.SetActive(toggle);
         Present.SetActive(!toggle);
         SwitchAudio = GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    private void OnMouseDown()
-    {
+        _input.SwitchEvent += Swap;
         
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
 
-        {
-            toggle = !toggle;
+    private void OnDestroy()
+    {
+        _input.SwitchEvent -= Swap;
+    }
+    
+    private void Swap()
+    {
+        toggle = !toggle;
         Past.SetActive(toggle);
         Present.SetActive(!toggle);
         SwitchAudio.Play(0);
-
-        }
-
     }
 }
