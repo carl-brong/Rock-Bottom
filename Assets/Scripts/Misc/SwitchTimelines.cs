@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*Carl Brong
+  SwitchTimelines
+*/
 public class SwitchTimelines : MonoBehaviour
 {
 
@@ -12,6 +15,8 @@ public class SwitchTimelines : MonoBehaviour
     [SerializeField] AudioSource SwitchAudio;
     [SerializeField] private InputReader _input;
     bool toggle = false;
+    bool canSwitch = true;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +34,29 @@ public class SwitchTimelines : MonoBehaviour
     
     private void Swap()
     {
+        if (!canSwitch) return;
         toggle = !toggle;
         Past.SetActive(toggle);
         Present.SetActive(!toggle);
         SwitchAudio.Play(0);
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            canSwitch = false;
+            Debug.Log("Tile overlap");
+        }
+    }
+    
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            canSwitch = true;
+            Debug.Log("Out of tile");
+        }
+     
     }
 }

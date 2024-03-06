@@ -146,6 +146,7 @@ public class Player : MonoBehaviour, IDamageable
     public void HealHealth(float amount)
     {
         CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth);
+        Anim.SetFloat("CurrentHealth", CurrentHealth);
         PlayerHealthChangeEvent?.Invoke(CurrentHealth);
     }
 

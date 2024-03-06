@@ -25,6 +25,15 @@ public class UIPauseOptionsDisplay : MonoBehaviour
     {
         _windowDropdown.value = PlayerPrefs.GetInt("Window", 0);
         _resolutionDropdown.value = PlayerPrefs.GetInt("Resolution", 0);
+
+        if (_windowDropdown.value != 0)
+        {
+            _resolutionObject.SetActive(false);
+        }
+        else
+        {
+            _resolutionObject.SetActive(true);
+        }
     }
     
     private void OnEnable()
