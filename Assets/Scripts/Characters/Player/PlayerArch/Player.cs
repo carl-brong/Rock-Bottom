@@ -20,7 +20,8 @@ public class Player : MonoBehaviour, IDamageable
 
     public Rigidbody2D Rb { get; private set; }
     public BoxCollider2D Bc { get; private set; }
-    public Transform GroundCheck { get; set; }
+    [SerializeField] private Transform GroundCheck1;
+    [SerializeField] private Transform GroundCheck2;
     public InputReader input;
     public Animator Anim { get; private set; }
 
@@ -67,7 +68,6 @@ public class Player : MonoBehaviour, IDamageable
 
         Rb = GetComponent<Rigidbody2D>();
         Bc = GetComponent<BoxCollider2D>();
-        GroundCheck = transform.GetChild(0);
         Anim = GetComponent<Animator>();
 
         #endregion
@@ -115,7 +115,8 @@ public class Player : MonoBehaviour, IDamageable
 
     public bool OnGround()
     {
-        return Physics2D.OverlapCircle(GroundCheck.position, 0.15f, _groundLayer);
+        return Physics2D.OverlapCircle(GroundCheck1.position, 0.15f, _groundLayer) || 
+               Physics2D.OverlapCircle(GroundCheck2.position, 0.15f, _groundLayer);
     }
 
     private void OnDrawGizmosSelected()

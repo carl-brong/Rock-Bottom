@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerSecondaryIdleState : PlayerSecondaryMovementState
 {
     private float _coyoteCounter;
+    private bool _grounded;
 
     public PlayerSecondaryIdleState(Player player, StateMachine<PlayerSecondaryMovementState> stateMachine) : base(player, stateMachine)
     {
@@ -16,7 +17,12 @@ public class PlayerSecondaryIdleState : PlayerSecondaryMovementState
     public override void Update()
     {
         _coyoteCounter -= Time.deltaTime;
-        if (Player.OnGround()) _coyoteCounter = Player.Data.coyoteTime;
+        if (Player.OnGround())
+        {
+            _grounded = true;
+            _coyoteCounter = Player.Data.coyoteTime;
+        }
+
         if (_coyoteCounter < 0 && Player.Rb.velocity.y < Mathf.Epsilon) StateMachine.ChangeState(Player.FallState);
     }
 
@@ -25,6 +31,7 @@ public class PlayerSecondaryIdleState : PlayerSecondaryMovementState
         if (StateMachine.CurrentState == this && _coyoteCounter > 0)
         {
             _coyoteCounter = 0;
+            _grounded = false;
             StateMachine.ChangeState(Player.JumpState);
             
         }
@@ -32,7 +39,8 @@ public class PlayerSecondaryIdleState : PlayerSecondaryMovementState
 
     private void HandleCrouch()
     {
-        if (Player.OnGround())
+        Debug.Log(_grounded);
+        if (_grounded)
         {
             StateMachine.ChangeState(Player.CrouchState);
         }

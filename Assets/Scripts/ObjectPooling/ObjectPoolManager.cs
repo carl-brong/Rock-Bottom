@@ -24,7 +24,7 @@ public class ObjectPoolManager : MonoBehaviour
         var spawn = pool.ObjPool.FirstOrDefault();
 
         
-        if (spawn is null)
+        if (spawn == null)
         {
             // If there aren't any then create an instance
             spawn = Instantiate(objPrefab, spawnPos, spawnRot, folder);

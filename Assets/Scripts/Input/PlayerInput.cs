@@ -152,7 +152,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""334606b8-5c23-4977-b54a-b67b4e0ff858"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
