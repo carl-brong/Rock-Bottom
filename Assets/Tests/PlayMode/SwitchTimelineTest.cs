@@ -11,6 +11,7 @@ using UnityEngine.TestTools;
 public class NewTestScript
 {
     private bool toggle = false;
+    private bool tempBool;
     private GameObject gameObject = new GameObject();
 
     [UnityTest]

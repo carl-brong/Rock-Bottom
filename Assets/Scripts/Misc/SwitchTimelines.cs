@@ -13,6 +13,7 @@ public class SwitchTimelines : MonoBehaviour
     public GameObject Present;
     private AudioSource SwitchAudio;
     bool toggle = false;
+    bool canSwitch = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +31,7 @@ public class SwitchTimelines : MonoBehaviour
 
     public void switchTime()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) && canSwitch)
 
         {
             toggle = !toggle;
@@ -40,6 +41,25 @@ public class SwitchTimelines : MonoBehaviour
 
         }
 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            canSwitch = false;
+            Debug.Log("Tile overlap");
+        }
+        
+        
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            canSwitch = true;
+            Debug.Log("Out of tile");
+        }
+        
     }
 }
         
