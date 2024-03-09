@@ -5,22 +5,28 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Vincent Development/With New Assets.unity
     guid: 2d5d21fc2b946d649a421d0493ba188c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/Level1.unity
     guid: a2b759ee473676148bc414b485c00ba8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/Level2.unity
     guid: c2f19d6611006934e83d4729ecefd968
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/Level3.unity
     guid: 2e04a42d79847694aab100e3bffcd1d7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/Level4.unity
     guid: c1b9d02c8b26c9f418c693e6f1038b4c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/Level5.unity
     guid: c92b5f6de05dae84a97307346089cd84
+  - enabled: 0
+    path: Assets/Scenes/RopeTest.unity
+    guid: 52d78fa302086034eb8906a76a1a32be
+  - enabled: 1
+    path: Assets/LevelTesting.unity
+    guid: 22668edeaff46a84e9818abc99dd9c15
   m_configObjects: {}

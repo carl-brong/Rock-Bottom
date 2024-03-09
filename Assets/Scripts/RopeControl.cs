@@ -7,8 +7,8 @@ using UnityEditor.Rendering;
 
 public class RopeControl : MonoBehaviour
 {
-    public float swingForce = 3.0f;
-    public float jumpOffForce = 8.0f;
+    public float swingForce = 10.0f;
+    public float jumpOffForce = 16.0f;
 
     public static Transform CollidedChain;
     public static List<Transform> Chains;
@@ -19,7 +19,7 @@ public class RopeControl : MonoBehaviour
     private Player playerController;
     private Quaternion locRotation;
 
-    public bool onRope = false;
+    private bool onRope = false;
     public bool testJump = false;
     public float dirX;
     private Vector3 scale;
@@ -40,18 +40,18 @@ public class RopeControl : MonoBehaviour
         if (onRope)
         {
             PlayerTransform.position = CollidedChain.position;
-            PlayerTransform.localRotation = Quaternion.AngleAxis(0.0f, Vector3.forward);
+            PlayerTransform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
 
             if (Input.GetKeyDown(KeyCode.Space) || testJump)
             {
                 StartCoroutine(JumpOff());
-
+                return;
             }
 
             dirX = Input.GetAxis("Horizontal");
 
             float dif = Quaternion.Angle(PlayerTransform.localRotation, Quaternion.AngleAxis(0, Vector3.forward));
-            if (dif <= 10.0f)
+            if (dif <= 25.0f)
                 CollidedChain.GetComponent<Rigidbody2D>().AddForce(Vector2.right * dirX * swingForce);
         }
 
@@ -59,38 +59,29 @@ public class RopeControl : MonoBehaviour
 
     public IEnumerator JumpOff()
     {
-        PlayerTransform.parent = null;
-        onRope = false;
         playerController.enabled = true;
+        PlayerTransform.parent = null;
+        
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
-        PlayerTransform.localRotation = locRotation;
+        PlayerTransform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
         PlayerTransform.localScale = scale;
+        
+        onRope = false; 
 
-        playerController.GetComponent<Rigidbody2D>().velocity = new Vector2(jumpOffForce * dirX, jumpOffForce);
-        //detachFromRope();
+        playerController.GetComponent<Rigidbody2D>().velocity = PlayerTransform.up * jumpOffForce;
         yield return new WaitForSeconds(0.30f);
 
         foreach (var c in colliders)
             c.enabled = true;
-    }
 
-    void detachFromRope()
-    {
-        PlayerTransform.parent = null;
-        onRope = false;
-        playerController.enabled = true;
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
-        PlayerTransform.localRotation = locRotation;
-        PlayerTransform.localScale = scale;
-
-        playerController.GetComponent<Rigidbody2D>().velocity = new Vector2(jumpOffForce * dirX, jumpOffForce);
+        
     }
 
     void attachToRope(Transform colTran)
     {
         scale = PlayerTransform.localScale;
+        locRotation = Quaternion.AngleAxis(0, Vector3.forward);
 
         playerController.enabled = false;
 
@@ -117,5 +108,10 @@ public class RopeControl : MonoBehaviour
             attachToRope(col.transform);
         }
         yield return null;
+    }
+
+    public bool OnRope()
+    {
+        return onRope;
     }
 }
