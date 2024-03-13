@@ -7,22 +7,21 @@ using UnityEditor.Rendering;
 
 public class RopeControl : MonoBehaviour
 {
-    public float swingForce = 10.0f;
-    public float jumpOffForce = 16.0f;
+    public float swingForce = 5.0f;                                            // used as the strength of player's horizontal movement on a rope.
+    public float jumpOffForce = 16.0f;                                          // used as the strength of the vertical jump velocity upon jumping off a rope.
 
-    public static Transform CollidedChain;
-    public static List<Transform> Chains;
+    public static Transform CollidedRope;                                       // stores the transform of the collided section of rope (The endlink in the current implementation)
+    public static List<Transform> Ropes;                                        // a list that stores the transforms for the connected rope sections.
 
-    private Transform PlayerTransform;
-    private int chainIndex;
-    private Collider2D[] colliders;
-    private Player playerController;
-    private Quaternion locRotation;
+    private Transform PlayerTransform;                                          // stores the players transform.
+    private int chainIndex;                                                     // stores the current index in the chain of rope sections.
+    private Collider2D[] colliders;                                             // an array used to store the player's colliders while they are attached to a rope.
+    private Player playerController;                                            // stores a variable for the playerController class for easy access.
 
-    private bool onRope = false;
-    public bool testJump = false;
-    public float dirX;
-    private Vector3 scale;
+    private bool onRope = false;                                                // boolean flag indicating the player is on a rope.
+    public bool testJump = false;                                               // public boolean to be used in a unit test.
+    public float dirX;                                                          // stores the most recent button press in the horizontal direction.
+    private Vector3 scale;                                                      // vector3 for storing the player transform's scale which is used to restore the character's scale upon exiting a rope.
 
 
 
@@ -39,20 +38,30 @@ public class RopeControl : MonoBehaviour
     {
         if (onRope)
         {
-            PlayerTransform.position = CollidedChain.position;
+            PlayerTransform.position = CollidedRope.position;
             PlayerTransform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
 
             if (Input.GetKeyDown(KeyCode.Space) || testJump)
             {
                 StartCoroutine(JumpOff());
+                PlayerTransform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
                 return;
             }
 
             dirX = Input.GetAxis("Horizontal");
 
-            float dif = Quaternion.Angle(PlayerTransform.localRotation, Quaternion.AngleAxis(0, Vector3.forward));
-            if (dif <= 25.0f)
-                CollidedChain.GetComponent<Rigidbody2D>().AddForce(Vector2.right * dirX * swingForce);
+            //CollidedRope.localScale = scale;
+            float angle = 0.0f;
+            Vector3 axis = Vector3.zero;
+            CollidedRope.rotation.ToAngleAxis(out angle, out axis);
+            angle *= Mathf.PI / 180;
+            angle = Mathf.Sqrt(angle * angle);
+            int i = -1;
+
+            if (angle <= Mathf.PI / 3)                                                                        // if 
+                CollidedRope.GetComponent<Rigidbody2D>().AddForce(Vector2.right * dirX * swingForce);
+            else if (angle >= Mathf.PI / 2)
+                CollidedRope.GetComponent<Rigidbody2D>().velocity = Vector2.down;
         }
 
     }
@@ -61,43 +70,45 @@ public class RopeControl : MonoBehaviour
     {
         playerController.enabled = true;
         PlayerTransform.parent = null;
-        
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
-        PlayerTransform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
-        PlayerTransform.localScale = scale;
+        playerController.GetComponent<Rigidbody2D>().rotation = 0.0f;
+        playerController.GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpOffForce * 10;
         
+        PlayerTransform.localScale = scale;
+
+        CollidedRope.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
         onRope = false; 
 
-        playerController.GetComponent<Rigidbody2D>().velocity = PlayerTransform.up * jumpOffForce;
-        yield return new WaitForSeconds(0.30f);
+        yield return new WaitForSeconds(0.25f);
+
+        playerController.GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpOffForce * jumpOffForce;
 
         foreach (var c in colliders)
             c.enabled = true;
 
-        
     }
 
     void attachToRope(Transform colTran)
     {
         scale = PlayerTransform.localScale;
-        locRotation = Quaternion.AngleAxis(0, Vector3.forward);
+        playerController.GetComponent<Rigidbody2D>().rotation = 0.0f;
 
         playerController.enabled = false;
 
         foreach (var c in colliders)
             c.enabled = false;
 
-        var chainsParents = colTran.parent;
-        Chains = new List<Transform>();
+        var RopesParents = colTran.parent;
+        Ropes = new List<Transform>();
 
-        foreach (Transform child in chainsParents)
-            Chains.Add(child);
+        foreach (Transform child in RopesParents)
+            Ropes.Add(child);
 
-        CollidedChain = colTran;
-        chainIndex = Chains.IndexOf(CollidedChain);
+        CollidedRope = colTran;
+        chainIndex = Ropes.IndexOf(CollidedRope);
 
-        PlayerTransform.parent = CollidedChain;
+        PlayerTransform.parent = CollidedRope;
         onRope = true;
     }
 

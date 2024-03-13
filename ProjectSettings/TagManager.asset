@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Terrain1
   - Terrain2
+  - Rope2D
+  - LineCart
   layers:
   - Default
   - TransparentFX
