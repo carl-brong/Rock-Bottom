@@ -123,7 +123,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Prototype
     originalName: 
-    pivot: {x: 0, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -136,7 +136,12 @@ ScriptedImporter:
     spriteBone: []
     spriteOutline: []
     vertices: []
-    spritePhysicsOutline: []
+    spritePhysicsOutline:
+    - outline:
+      - {x: -5, y: 5}
+      - {x: -5, y: -5}
+      - {x: 5, y: -5}
+      - {x: 5, y: 5}
     indices: 
     edges: []
     tessellationDetail: 0

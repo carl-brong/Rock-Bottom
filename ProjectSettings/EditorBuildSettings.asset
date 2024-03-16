@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Vincent Development/With New Assets.unity
-    guid: 2d5d21fc2b946d649a421d0493ba188c
+    path: Assets/VDev/TitleScreen.unity
+    guid: 5898decf312bcec4eae84536b5e016e5
   - enabled: 1
     path: Assets/Scenes/Levels/Level1.unity
     guid: a2b759ee473676148bc414b485c00ba8

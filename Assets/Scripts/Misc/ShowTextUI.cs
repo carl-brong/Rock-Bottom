@@ -9,6 +9,7 @@ public class ShowTextUI : MonoBehaviour
     [SerializeField] GameObject TextUIObject;
     private TextMeshProUGUI fadeAwayText;
     [SerializeField] float waitTime;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,9 @@ public class ShowTextUI : MonoBehaviour
             
             TextUIObject.SetActive(true);
             StartCoroutine("WaitForTime");
-            
+            audioSource = GetComponent<AudioSource>();
+            audioSource.Play(0);
+
 
         }
     }

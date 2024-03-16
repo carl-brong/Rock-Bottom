@@ -21,19 +21,19 @@ public class SwitchScene : MonoBehaviour
   
             if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level1"))
             {
-                SceneManager.LoadScene("Level2");
+                SceneManager.LoadScene(2);
             }
             else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level2"))
             {
-                SceneManager.LoadScene("Level3");
+                SceneManager.LoadScene(3);
             }
             else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level3"))
             {
-                SceneManager.LoadScene("Level4");
+                SceneManager.LoadScene(4);
             }
             else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level4"))
             {
-                SceneManager.LoadScene("Level5");
+                SceneManager.LoadScene(5);
             }
 
         }

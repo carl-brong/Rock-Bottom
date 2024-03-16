@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,39 +10,37 @@ using UnityEngine.SceneManagement;
 public class SwitchTimelines : MonoBehaviour
 {
 
-    public GameObject Past;
-    public GameObject Present;
-    private AudioSource SwitchAudio;
+    [SerializeField] GameObject Past;
+    [SerializeField] GameObject Present;
+    [SerializeField] AudioSource SwitchAudio;
+    [SerializeField] private InputReader _input;
     bool toggle = false;
     bool canSwitch = true;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
         Past.SetActive(toggle);
         Present.SetActive(!toggle);
         SwitchAudio = GetComponent<AudioSource>();
+        _input.SwitchEvent += Swap;
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        switchTime();
+        _input.SwitchEvent -= Swap;
     }
-
-    public void switchTime()
+    
+    private void Swap()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && canSwitch)
-
-        {
-            toggle = !toggle;
-            Past.SetActive(toggle);
-            Present.SetActive(!toggle);
-            SwitchAudio.Play(0);
-
-        }
-
+        if (!canSwitch) return;
+        toggle = !toggle;
+        Past.SetActive(toggle);
+        Present.SetActive(!toggle);
+        SwitchAudio.Play(0);
     }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
@@ -49,9 +48,8 @@ public class SwitchTimelines : MonoBehaviour
             canSwitch = false;
             Debug.Log("Tile overlap");
         }
-        
-        
     }
+    
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
@@ -59,10 +57,6 @@ public class SwitchTimelines : MonoBehaviour
             canSwitch = true;
             Debug.Log("Out of tile");
         }
-        
+     
     }
 }
-        
-
-
-

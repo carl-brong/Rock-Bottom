@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Vincent Development/Enemy/Cannon.cs.meta
+guid: 7e062dbba7d3f4a4680aa2aeb47890d6
+========
 guid: f5832272861506843a5dbc32ed209688
+>>>>>>>> origin/mechanics:Assets/Scripts/Misc/FadeText.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
