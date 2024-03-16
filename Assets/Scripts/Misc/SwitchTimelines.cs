@@ -12,7 +12,7 @@ public class SwitchTimelines : MonoBehaviour
 
     [SerializeField] GameObject Past;
     [SerializeField] GameObject Present;
-    [SerializeField] AudioSource SwitchAudio;
+    private AudioSource SwitchAudio;
     [SerializeField] private InputReader _input;
     bool toggle = false;
     bool canSwitch = true;
