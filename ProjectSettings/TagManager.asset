@@ -9,7 +9,7 @@ TagManager:
   - Terrain1
   - Terrain2
   - Rope2D
-  - LineCart
+  - MovingPlatformH
   layers:
   - Default
   - TransparentFX

@@ -4,43 +4,70 @@ using UnityEngine;
 
 public class AllSeeingEye : MonoBehaviour
 {
+    public float timeBeforeAttack = 3.0f;
+    public float attackDamage = 10.0f;
+    
     private float eyeHeightRange = 1.8f;
-    private float playerRadius = 0.7f;
+    private float dirX = 0.0f;
+    
+    private float eyeContactCount = 0.0f;
 
-    private Collider2D playerCol;                                               // stores the player's collider object for convenient access.
     private Transform PlayerTransform;                                          // stores the player's transform for convenient access.
-    private bool inRange = false;
+    private Rigidbody2D playerRb;
+    private bool atHeight = false;
     private bool inSight = false;
-    private bool first = true;
+    private bool eyeContact = false;
+
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         GameObject p = GameObject.FindWithTag("Player");
         PlayerTransform = p.transform;
-        playerCol = p.GetComponent<Collider2D>();
+        playerRb = p.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float curPlayerY = PlayerTransform.position.y;
-        if (curPlayerY < transform.position.y && curPlayerY > transform.position.y - eyeHeightRange)
+        float vel = playerRb.velocity.x;
+        if (vel < 0) dirX = -1.0f;
+        else if (vel > 0) dirX = 1.0f;
+    }
+
+    void FixedUpdate()
+    {
+        atHeight = (PlayerTransform.position.y < transform.position.y + (eyeHeightRange / 2)
+                    && PlayerTransform.position.y > transform.position.y - (eyeHeightRange / 2));
+
+        Vector2 firePoint = new Vector2(transform.position.x, transform.position.y - (eyeHeightRange / 2));
+        Vector2 direction = new Vector2(-1, 0); 
+
+        RaycastHit2D hit = Physics2D.Raycast(firePoint, direction, Mathf.Infinity, LayerMask.GetMask("Default"));
+
+        if (hit.collider != null && atHeight)
         {
-            inRange = true;
-            Vector2 firePoint = new Vector2(transform.position.x, transform.position.y - eyeHeightRange / 2);
-            RaycastHit2D cast = Physics2D.Raycast(firePoint, Vector2.left);
-
-            if (cast.point.y <= PlayerTransform.position.y && cast.point.y >= PlayerTransform.position.y - eyeHeightRange)
-            {
-                inSight = true;
-                if (cast.collider.name == "Player") // not working
-                    PlayerTransform.position = new Vector2(PlayerTransform.position.x, PlayerTransform.position.y + 10);    // test for raycast contact with player
-
-            }
-
+            inSight = (hit.collider.gameObject.name == "Player");
+            eyeContact = (dirX == direction.x * -1);
         }
-        else if (curPlayerY < (transform.position.y - eyeHeightRange))
-            first = true;
+        else inSight = false;
+
+        if (inSight && eyeContact) eyeContactCount += Time.deltaTime;
+        else eyeContactCount = 0.0f;
+
+        if (eyeContactCount >= timeBeforeAttack)
+        {
+            Attack();
+            eyeContactCount = 0.0f;
+        }
+    }
+
+    void Attack()
+    {
+        PlayerTransform.gameObject.GetComponent<Player>().LoseHealth(attackDamage);
+        Debug.Log("Player hit by eye monster!");
+        inSight = false;
     }
 }
