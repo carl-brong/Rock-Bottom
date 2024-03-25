@@ -37,6 +37,8 @@ public class PlayerMoveState : PlayerPrimaryMovementState
             Player.Rb.velocity = new Vector2(0, Player.Rb.velocity.y);
             StateMachine.ChangeState(Player.PrimaryIdleState);
         }
+
+
     }
 
     private void Flip(float moveX)
@@ -66,6 +68,10 @@ public class PlayerMoveState : PlayerPrimaryMovementState
         var decel = Player.OnGround() ? 999 : Player.Data.airDecelerationForce;
         float clampedForce;
         var velocity = Player.Rb.velocity;
+
+        if(Input.GetKeyDown(KeyCode.LeftShift)) {
+            velocity = velocity * 2;
+                }
         switch (_moveX)
         {
             case > 0:

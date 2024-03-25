@@ -31,9 +31,13 @@ public class SwitchScene : MonoBehaviour
             {
                 SceneManager.LoadScene(4);
             }
-            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level4"))
+            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Cutscene"))
             {
                 SceneManager.LoadScene(5);
+            }
+            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level4"))
+            {
+                SceneManager.LoadScene(6);
             }
 
         }

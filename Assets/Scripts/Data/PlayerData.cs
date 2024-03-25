@@ -25,4 +25,7 @@ public class PlayerData : ScriptableObject
         airAccelerationForce = maxHorizontalSpeed / airAccelerationTime;
         airDecelerationForce = maxHorizontalSpeed / airDecelerationTIme;
     }
+
+
+
 }

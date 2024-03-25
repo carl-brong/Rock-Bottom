@@ -7,6 +7,7 @@ public class AIFollow : MonoBehaviour
     private GameObject player;
     public float speed;
     private float distance;
+    [SerializeField] private int minDistance = 30;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +32,7 @@ public class AIFollow : MonoBehaviour
         {
             scale.x = Mathf.Abs(scale.x) * -1;
         }
-        if(distance < 30)
+        if(distance < minDistance)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(Vector3.forward * angle);

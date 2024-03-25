@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDamageable
 {
+
+    private bool isWallSliding;
+    private float wallFallSpeed = 6f;
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] LayerMask wallLayer;
+    private PlayerData sprintButton;
+
+
     #region State Machine Variables
 
     public StateMachine<PlayerPrimaryMovementState> PrimaryMovementStateMachine { get; private set; }
@@ -72,6 +80,7 @@ public class Player : MonoBehaviour, IDamageable
         Anim = GetComponent<Animator>();
         jumpSound = GetComponent<AudioSource>();
 
+
         #endregion
 
 
@@ -109,6 +118,14 @@ public class Player : MonoBehaviour, IDamageable
         {
             jumpSound.Play();
         }
+        if (OnWall())
+        {
+            WallSlide();
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            sprintButton.maxHorizontalSpeed = sprintButton.maxHorizontalSpeed * 2;
+        }
     }
 
     private void FixedUpdate()
@@ -121,10 +138,30 @@ public class Player : MonoBehaviour, IDamageable
 
     public bool OnGround()
     {
-        return Physics2D.OverlapCircle(GroundCheck1.position, 0.15f, _groundLayer); /*|| 
-               Physics2D.OverlapCircle(GroundCheck2.position, 0.15f, _groundLayer);*/
+        
+        return Physics2D.OverlapCircle(GroundCheck1.position, 0.15f, _groundLayer) ||
+               Physics2D.OverlapCircle(wallCheck.position, 0.15f, wallLayer);
     }
 
+    public bool OnWall()
+    {
+        return Physics2D.OverlapCircle(wallCheck.position, 0.15f, wallLayer);
+    }
+
+    private void WallSlide()
+    {
+        if(OnGround()) 
+        {
+            isWallSliding = true;
+            Rb.velocity = new Vector2(Rb.velocity.x, Mathf.Clamp(Rb.velocity.y, -wallFallSpeed, float.MaxValue));
+            //OnGround();
+            Debug.Log(OnGround());
+        }
+        else
+        {
+            isWallSliding = false;
+        }
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.GetChild(0).position, 0.15f);
