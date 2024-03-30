@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class ShowTextUI : MonoBehaviour
 {
-    [SerializeField] float fadeTime;
+   
     [SerializeField] GameObject TextUIObject;
     private TextMeshProUGUI fadeAwayText;
     [SerializeField] float waitTime;
     private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
+    private bool hasPlayed = false; 
 
     // Start is called before the first frame update
     void Start()
@@ -20,14 +22,26 @@ public class ShowTextUI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        
+        if (collision.gameObject.tag == "Player")
         {
+            audioSource = GetComponent<AudioSource>();
+            if (!hasPlayed)
+            {
+                
+                audioSource.PlayOneShot(audioClip);
+                hasPlayed = true;
+            }
             
+
             TextUIObject.SetActive(true);
             StartCoroutine("WaitForTime");
-            audioSource = GetComponent<AudioSource>();
-            audioSource.Play(0);
 
+            
+            
+
+                
+    
 
         }
     }
@@ -35,18 +49,6 @@ public class ShowTextUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        /*if (fadeTime < 0)
-        {
-            fadeTime += Time.deltaTime;
-            fadeAwayText.color = new Color(fadeAwayText.color.r, fadeAwayText.color.g, fadeAwayText.color.b, fadeTime);
-        }*/
-
-        if (fadeTime > 0)
-        {
-            fadeTime -= Time.deltaTime;
-            fadeAwayText.color = new Color(fadeAwayText.color.r, fadeAwayText.color.g, fadeAwayText.color.b, fadeTime);
-        }
     }
     IEnumerator WaitForTime()
     {

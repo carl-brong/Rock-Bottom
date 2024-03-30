@@ -27,7 +27,7 @@ public class Cannon : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         var obj = ObjectPoolManager.SpawnObject(prefab, firePosition.position, firePosition.rotation, folder);
-        obj.GetComponent<TempProj>().dir = new Vector2(transform.localScale.y, 0);
+        obj.GetComponent<TempProj>().dir = new Vector2(transform.localScale.x, 0);
         StartCoroutine(Shoot());
     }
 

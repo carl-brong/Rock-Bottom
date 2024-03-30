@@ -10,6 +10,7 @@ public class MovablePlatform : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] int startPos;
     [SerializeField] Transform[] boundPoints;
+    [SerializeField] GameObject player;
     private int i;
     void Start()
     {
@@ -37,7 +38,7 @@ public class MovablePlatform : MonoBehaviour
         {
             if(transform.position.y < collision.transform.position.y -1.0f)
             {
-                collision.transform.SetParent(transform);
+                collision.transform.parent = transform;
             }
             
         }
@@ -46,7 +47,9 @@ public class MovablePlatform : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.transform.SetParent(null);
+            collision.transform.parent = null;
+           
         }
+        DontDestroyOnLoad(player);
     }
 }

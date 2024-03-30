@@ -6,24 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/VDev/TitleScreen.unity
+    path: Assets/Scenes/Main/TitleScreen.unity
     guid: 5898decf312bcec4eae84536b5e016e5
   - enabled: 1
-    path: Assets/Scenes/Levels/Level1.unity
+    path: Assets/Scenes/Main/Level1.unity
     guid: a2b759ee473676148bc414b485c00ba8
   - enabled: 1
-    path: Assets/Scenes/Levels/Level2.unity
+    path: Assets/Scenes/Main/Level2.unity
     guid: 032cccb3eb6dd364b8a5b19067db12ab
   - enabled: 1
-    path: Assets/Scenes/Levels/Level3.unity
+    path: Assets/Scenes/Main/Level3.unity
     guid: 8d501df7ba85b6c47bb2942296d7e8e0
   - enabled: 1
-    path: Assets/Scenes/Levels/Cutscene.unity
+    path: Assets/Scenes/Main/Cutscene.unity
     guid: e63585f899696e642b32fda0da3f769e
   - enabled: 1
-    path: Assets/Scenes/Levels/Level4.unity
+    path: Assets/Scenes/Main/Level4.unity
     guid: a3b570367e67a504ca5cca6432cfeb30
   - enabled: 1
-    path: Assets/Scenes/Levels/Level5.unity
-    guid: edf0aad37068fbf4fa4605dfd7a25f0a
+    path: Assets/Scenes/Main/Level5.unity
+    guid: 9cf1e28fbea14604d8e138e06af88346
+  - enabled: 1
+    path: Assets/Scenes/Main/Cutscene Final.unity
+    guid: 9b7aa963e97cd114b9d2ec3eecdb5c19
   m_configObjects: {}

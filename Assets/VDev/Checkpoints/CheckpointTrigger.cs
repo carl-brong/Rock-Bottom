@@ -20,7 +20,7 @@ public class CheckpointTrigger : MonoBehaviour
         {
             _player.startpos = other.transform.position;
             _triggered = true;
-            Debug.Log("Checkpoint Works.");
+            Debug.Log(_player.startpos);
         }
     }
 }
