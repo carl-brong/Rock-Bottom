@@ -16,6 +16,6 @@ public class Restarter : MonoBehaviour
         _player.Rb.velocity = Vector2.zero;
         _player.HealHealth(1000);
         _player.transform.position = _player.startpos;
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
