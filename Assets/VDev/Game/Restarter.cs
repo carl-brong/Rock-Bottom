@@ -7,6 +7,7 @@ public class Restarter : MonoBehaviour
 {
     private GameObject _playerObject;
     private Player _player;
+    public bool isRestarted = false;
     
     public void RestartGame()
     {
@@ -17,5 +18,7 @@ public class Restarter : MonoBehaviour
         _player.HealHealth(1000);
         _player.transform.position = _player.startpos;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        isRestarted = true;
+
     }
 }

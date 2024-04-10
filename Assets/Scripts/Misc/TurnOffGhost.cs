@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Carl Brong
 public class TurnOffGhost : MonoBehaviour
 {
     private SpriteRenderer GhostSprite;

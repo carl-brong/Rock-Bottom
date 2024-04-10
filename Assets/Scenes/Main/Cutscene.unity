@@ -458,6 +458,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1208421789}
+    - target: {fileID: 256372746394727712, guid: 2bfd6b7d9621d9949bf64998adc7816d, type: 3}
+      propertyPath: _submitAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 50303b45e6cd74649b9ea957937ceb7c, type: 3}
+    - target: {fileID: 256372746394727712, guid: 2bfd6b7d9621d9949bf64998adc7816d, type: 3}
+      propertyPath: _selectionAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 50303b45e6cd74649b9ea957937ceb7c, type: 3}
     - target: {fileID: 355224143649305540, guid: 2bfd6b7d9621d9949bf64998adc7816d, type: 3}
       propertyPath: m_text
       value: I don't think I can get this done on time.
@@ -12599,7 +12607,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -14591,6 +14599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0fc4632264b5d45b3be3ce6a203351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRestarted: 0
 --- !u!114 &1208421789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15262,6 +15271,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  destroyPlayer: {fileID: 0}
+  destroyAudio: {fileID: 0}
+  destroyCamera: {fileID: 0}
 --- !u!1 &1551989357
 GameObject:
   m_ObjectHideFlags: 0

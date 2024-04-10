@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-
+//Carl Brong
 public class LightFlicker : MonoBehaviour
 {
     [SerializeField] float flickerIntensity = 0.2f;

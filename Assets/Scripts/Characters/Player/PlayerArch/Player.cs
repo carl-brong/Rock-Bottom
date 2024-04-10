@@ -147,7 +147,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         return Physics2D.OverlapCircle(wallCheck.position, 0.15f, wallLayer);
     }
-
+    //Carl Brong Start
     private void WallSlide()
     {
         if(OnGround()) 
@@ -162,6 +162,7 @@ public class Player : MonoBehaviour, IDamageable
             isWallSliding = false;
         }
     }
+    //Carl Brong End
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.GetChild(0).position, 0.15f);

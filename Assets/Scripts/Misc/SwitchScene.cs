@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+//Carl Brong
 public class SwitchScene : MonoBehaviour
 {
     public Animator animator;
@@ -69,6 +69,12 @@ public class SwitchScene : MonoBehaviour
                     SceneManager.LoadScene(7);
                     break;
                 case 7:
+                    Destroy(destroyPlayer);
+                    Destroy(destroyAudio);
+                    Destroy(destroyCamera);
+                    SceneManager.LoadScene(8);
+                    break;
+                case 8:
                     Destroy(destroyPlayer);
                     Destroy(destroyAudio);
                     Destroy(destroyCamera);
