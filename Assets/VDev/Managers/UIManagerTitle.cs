@@ -8,6 +8,7 @@ public class UIManagerTitle : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private UITitleScreen _titleScreen;
+    [SerializeField] private LevelSelector _levelSelector;
     [SerializeField] private UIPauseOptions _pauseOptions;
     [SerializeField] private UIPauseOptionsGame _pauseGame;
     [SerializeField] private UIPauseOptionsDisplay _pauseDisplay;
@@ -33,16 +34,52 @@ public class UIManagerTitle : MonoBehaviour
 
     private void OnEnable()
     {
-        _titleScreen.StartedGame += StartGame;
+        _titleScreen.LevelSelectOpened += OpenLevelSelector;
         _titleScreen.OptionsMenuOpened += OpenOptionsMenu;
         _titleScreen.ExitedGame += ExitGame;
     }
 
     private void OnDisable()
     {
-        _titleScreen.StartedGame -= StartGame;
+        _titleScreen.LevelSelectOpened -= OpenLevelSelector;
         _titleScreen.OptionsMenuOpened -= OpenOptionsMenu;
         _titleScreen.ExitedGame -= ExitGame;
+    }
+
+    private void OpenLevelSelector()
+    {
+        // Input Reader Events
+        _inputReader.PopMenuEvent += CloseLevelSelector; // Allows the user to close the options menu
+        
+        // Main Events
+        _titleScreen.LevelSelectOpened -= OpenLevelSelector; // Disable Play Button
+        _titleScreen.OptionsMenuOpened -= OpenOptionsMenu; // Disable Options Button
+        _titleScreen.ExitedGame -= ExitGame; // Disable Exit Button
+        
+        // Level Select Events
+        _levelSelector.StartedGame += StartGame;
+        
+        // Display UI
+        _levelSelector.gameObject.SetActive(true);
+        _titleScreen.gameObject.SetActive(false);
+    }
+
+    private void CloseLevelSelector()
+    {
+        // Input Reader Events
+        _inputReader.PopMenuEvent -= CloseLevelSelector; // Allows the user to close the options menu
+        
+        // Main Events
+        _titleScreen.LevelSelectOpened += OpenLevelSelector; // Disable Play Button
+        _titleScreen.OptionsMenuOpened += OpenOptionsMenu; // Disable Options Button
+        _titleScreen.ExitedGame += ExitGame; // Disable Exit Button
+        
+        // Level Select Events
+        _levelSelector.StartedGame -= StartGame;
+        
+        // Display UI
+        _levelSelector.gameObject.SetActive(false);
+        _titleScreen.gameObject.SetActive(true);
     }
     
     private void OpenOptionsMenu()
@@ -51,7 +88,7 @@ public class UIManagerTitle : MonoBehaviour
         _inputReader.PopMenuEvent += CloseOptionsMenu; // Allows the user to close the options menu
         
         // Main Events
-        _titleScreen.StartedGame -= StartGame; // Disable Play Button
+        _titleScreen.LevelSelectOpened -= OpenLevelSelector; // Disable Play Button
         _titleScreen.OptionsMenuOpened -= OpenOptionsMenu; // Disable Options Button
         _titleScreen.ExitedGame -= ExitGame; // Disable Exit Button
         
@@ -72,7 +109,7 @@ public class UIManagerTitle : MonoBehaviour
         _inputReader.PopMenuEvent -= CloseOptionsMenu; // Stops the user from closing the options menu more than once
         
         // Main Events
-        _titleScreen.StartedGame += StartGame; // Enable Play Button
+        _titleScreen.LevelSelectOpened += OpenLevelSelector; // Enable Play Button
         _titleScreen.OptionsMenuOpened += OpenOptionsMenu; // Enable Options Button
         _titleScreen.ExitedGame += ExitGame; // Enable Exit Button
         
@@ -253,9 +290,9 @@ public class UIManagerTitle : MonoBehaviour
 
     private void StartGame()
     {
+        _levelSelector.StartedGame -= StartGame;
         _gameStateManager.UpdateGameState(GameState.Gameplay);
         _inputReader.EnableGameplayControls();
-        SceneManager.LoadScene(sceneBuildIndex: 1);
     }
 
     private void ExitGame()

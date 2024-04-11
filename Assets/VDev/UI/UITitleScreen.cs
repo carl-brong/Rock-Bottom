@@ -14,7 +14,7 @@ public class UITitleScreen : MonoBehaviour
 
     private Button _playButton, _optionsButton, _exitButton;
     
-    public event UnityAction StartedGame = delegate { };
+    public event UnityAction LevelSelectOpened = delegate { };
     public event UnityAction OptionsMenuOpened = delegate { };
     public event UnityAction ExitedGame = delegate { };
 
@@ -27,7 +27,7 @@ public class UITitleScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        _playButton.onClick.AddListener(StartGame);
+        _playButton.onClick.AddListener(OpenLevelSelect);
         _optionsButton.onClick.AddListener(OpenOptions);
         _exitButton.onClick.AddListener(ExitGame);
         StartCoroutine(Delay());
@@ -35,14 +35,14 @@ public class UITitleScreen : MonoBehaviour
 
     private void OnDisable()
     {
-        _playButton.onClick.RemoveListener(StartGame);
+        _playButton.onClick.RemoveListener(OpenLevelSelect);
         _optionsButton.onClick.RemoveListener(OpenOptions);
         _exitButton.onClick.RemoveListener(ExitGame);
     }
 
-    private void StartGame()
+    private void OpenLevelSelect()
     {
-        StartedGame.Invoke();
+        LevelSelectOpened.Invoke();
     }
 
     private void OpenOptions()
