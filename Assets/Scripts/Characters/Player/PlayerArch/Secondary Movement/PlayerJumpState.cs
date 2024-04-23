@@ -39,4 +39,5 @@ public class PlayerJumpState : PlayerSecondaryMovementState
             Player.Rb.velocity = velocity;
         }
     }
+
 }
