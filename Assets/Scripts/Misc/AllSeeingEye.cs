@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Jacob Wilt
 public class AllSeeingEye : MonoBehaviour
 {
     public float timeBeforeAttack = 3.0f;                                       // the amount of time the player can look at the eye monster before being hurt by it.

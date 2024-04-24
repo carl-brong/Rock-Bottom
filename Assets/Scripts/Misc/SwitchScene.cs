@@ -33,49 +33,49 @@ public class SwitchScene : MonoBehaviour
             {
 
                 case 1:
-                    Destroy(destroyPlayer);
+                    //Destroy(destroyPlayer);
                     Destroy(destroyAudio);
                     Destroy(destroyCamera);
                     SceneManager.LoadScene(2);
                     break;
                 case 2:
-                    Destroy(destroyPlayer);
+                    //Destroy(destroyPlayer);
                     Destroy(destroyAudio);
                     Destroy(destroyCamera);
                     SceneManager.LoadScene(3); 
                     break;
                 case 3:
-                    Destroy(destroyPlayer);
+                    //Destroy(destroyPlayer);
                     Destroy(destroyAudio);
                     Destroy(destroyCamera);
                     SceneManager.LoadScene(4);
                     break;
                 case 4:
-                    Destroy(destroyPlayer);
+                    //Destroy(destroyPlayer);
                     Destroy(destroyAudio);
                     Destroy(destroyCamera);
                     SceneManager.LoadScene(5);
                     break;
                 case 5:
-                    Destroy(destroyPlayer);
+                    //Destroy(destroyPlayer);
                     Destroy(destroyAudio);
                     Destroy(destroyCamera);
                     SceneManager.LoadScene(6);
                     break;
                 case 6:
-                    Destroy(destroyPlayer);
+                    //Destroy(destroyPlayer);
                     Destroy(destroyAudio);
                     Destroy(destroyCamera);
                     SceneManager.LoadScene(7);
                     break;
                 case 7:
-                    Destroy(destroyPlayer);
+                    //Destroy(destroyPlayer);
                     Destroy(destroyAudio);
                     Destroy(destroyCamera);
                     SceneManager.LoadScene(8);
                     break;
                 case 8:
-                    Destroy(destroyPlayer);
+                    //Destroy(destroyPlayer);
                     Destroy(destroyAudio);
                     Destroy(destroyCamera);
                     SceneManager.LoadScene(0);
