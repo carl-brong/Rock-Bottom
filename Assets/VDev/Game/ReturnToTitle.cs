@@ -18,6 +18,6 @@ public class ReturnToTitle : MonoBehaviour
     public void ExitToTitle()
     {
         TearDown();
-        SceneManager.LoadScene(sceneBuildIndex: 0);
+        SceneManager.LoadScene(sceneBuildIndex: 1);
     }
 }

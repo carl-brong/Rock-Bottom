@@ -8,7 +8,6 @@ public class SwitchScene : MonoBehaviour
     public Animator animator;
     [SerializeField] GameObject destroyPlayer;
     [SerializeField] GameObject destroyAudio;
-    [SerializeField] GameObject destroyCamera;
     private void Start()
     {
         Scene currentScene = SceneManager.GetActiveScene();
@@ -32,52 +31,50 @@ public class SwitchScene : MonoBehaviour
             switch (levelNumber)
             {
 
-                case 1:
-                    //Destroy(destroyPlayer);
-                    Destroy(destroyAudio);
-                    Destroy(destroyCamera);
-                    SceneManager.LoadScene(2);
-                    break;
                 case 2:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
-                    SceneManager.LoadScene(3); 
+                    SceneManager.LoadScene(3);
+                    Destroy(destroyPlayer);
                     break;
                 case 3:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
                     SceneManager.LoadScene(4);
+                    Destroy(destroyPlayer);
                     break;
                 case 4:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
                     SceneManager.LoadScene(5);
+                    Destroy(destroyPlayer);
                     break;
                 case 5:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
                     SceneManager.LoadScene(6);
                     break;
                 case 6:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
                     SceneManager.LoadScene(7);
+                    Destroy(destroyPlayer);
                     break;
                 case 7:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
                     SceneManager.LoadScene(8);
+                    Destroy(destroyPlayer);
                     break;
                 case 8:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
+                    SceneManager.LoadScene(9);
+                    Destroy(destroyPlayer);
+                    break;
+                case 9:
+                    Destroy(destroyPlayer);
+                    Destroy(destroyAudio);
                     SceneManager.LoadScene(0);
                     break;
 
