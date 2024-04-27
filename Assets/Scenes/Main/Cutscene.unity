@@ -15273,7 +15273,6 @@ MonoBehaviour:
   animator: {fileID: 0}
   destroyPlayer: {fileID: 1174227332}
   destroyAudio: {fileID: 1462659164}
-  destroyCamera: {fileID: 1995170428}
 --- !u!1 &1551989357
 GameObject:
   m_ObjectHideFlags: 0
