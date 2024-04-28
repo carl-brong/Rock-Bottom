@@ -8,10 +8,15 @@ public class SwitchScene : MonoBehaviour
     public Animator animator;
     [SerializeField] GameObject destroyPlayer;
     [SerializeField] GameObject destroyAudio;
+    [SerializeField] GameObject positionAnchor;
+    private Player player;
+    private GameObject playerObject;
     private void Start()
     {
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
+        playerObject = GameObject.FindWithTag("Player");
+        player = playerObject.GetComponent<Player>();
     }
     private void Update()
     {
@@ -32,42 +37,47 @@ public class SwitchScene : MonoBehaviour
                     
                     Destroy(destroyAudio);
                     SceneManager.LoadScene(3);
-                    Destroy(destroyPlayer);
+                    player.transform.position = positionAnchor.transform.position;
+                    
+                    DontDestroyOnLoad(player);
+                    
+
                     break;
                 case 3:
-                    
+                   
                     Destroy(destroyAudio);
                     SceneManager.LoadScene(4);
-                    Destroy(destroyPlayer);
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 4:
                     
                     Destroy(destroyAudio);
                     SceneManager.LoadScene(5);
-                    Destroy(destroyPlayer);
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 5:
                     
                     Destroy(destroyAudio);
                     SceneManager.LoadScene(6);
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 6:
                     
                     Destroy(destroyAudio);
                     SceneManager.LoadScene(7);
-                    Destroy(destroyPlayer);
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 7:
                     
                     Destroy(destroyAudio);
                     SceneManager.LoadScene(8);
-                    Destroy(destroyPlayer);
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 8:
                     
                     Destroy(destroyAudio);
                     SceneManager.LoadScene(9);
-                    Destroy(destroyPlayer);
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 9:
                     Destroy(destroyPlayer);
