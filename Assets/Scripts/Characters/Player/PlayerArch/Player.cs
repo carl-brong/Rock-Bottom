@@ -114,6 +114,7 @@ public class Player : MonoBehaviour, IDamageable
         SecondaryMovementStateMachine.CurrentState.Update();
         
         Anim.SetBool("isGrounded", OnGround());
+        //Carl Brong Start
         if (Input.GetKeyDown(KeyCode.Space) && OnGround())
         {
             jumpSound.Play();
@@ -122,10 +123,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             WallSlide();
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            sprintButton.maxHorizontalSpeed = sprintButton.maxHorizontalSpeed * 2;
-        }
+        //Carl Brong End
     }
 
     private void FixedUpdate()

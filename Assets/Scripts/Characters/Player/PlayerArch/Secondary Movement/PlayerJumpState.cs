@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerSecondaryMovementState
 {
+
     
     public PlayerJumpState(Player player, StateMachine<PlayerSecondaryMovementState> stateMachine) : base(player, stateMachine)
     {

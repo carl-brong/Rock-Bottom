@@ -15,10 +15,7 @@ public class SwitchScene : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetMouseButton(0))
-        {
-            fadeToLevel(1);
-        }
+       
     }
     // Update is called once per frame
     void OnTriggerEnter2D(Collider2D collision)
@@ -86,10 +83,10 @@ public class SwitchScene : MonoBehaviour
         
     }
 
-    public void fadeToLevel(int levelIndex)
+    /*public void fadeToLevel(int levelIndex)
     {
         animator.SetTrigger("FadeOut");
-    }
+    }*/
 
     
      
