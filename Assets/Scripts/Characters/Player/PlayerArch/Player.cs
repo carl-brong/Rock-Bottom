@@ -54,6 +54,7 @@ public class Player : MonoBehaviour, IDamageable
     public PlayerData Data;
     public Vector3 startpos;
     [SerializeField] private GameStateSO _gameStateManager;
+    public Canvas pauseMenu;
 
     private void Awake()
     {
@@ -83,6 +84,8 @@ public class Player : MonoBehaviour, IDamageable
 
         #endregion
 
+        input.PauseEvent += EnablePause;
+
 
     }
 
@@ -104,6 +107,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         TempProj.PlayerHit -= LoseHealth;
         Spikes.HitSpike -= LoseHealth;
+        input.PauseEvent -= EnablePause;
     }
 
     // Update is called once per frame
@@ -168,6 +172,11 @@ public class Player : MonoBehaviour, IDamageable
         Gizmos.DrawWireSphere(transform.GetChild(0).position, 0.15f);
     }
 
+    private void EnablePause()
+    {
+        pauseMenu.gameObject.SetActive(true);
+    }
+    
     #region Health Functions
 
     public void LoseHealth(float amount)

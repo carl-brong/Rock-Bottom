@@ -18,6 +18,7 @@ public class PersistObject : MonoBehaviour
             if (obj == this) break;
             if (obj.objectID == objectID)
             {
+                Debug.Log("Destroyed " + gameObject.name);
                 Destroy(gameObject);
             }
         }
