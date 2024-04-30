@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerSecondaryMovementState
 {
+
     
     public PlayerJumpState(Player player, StateMachine<PlayerSecondaryMovementState> stateMachine) : base(player, stateMachine)
     {
@@ -32,12 +33,12 @@ public class PlayerJumpState : PlayerSecondaryMovementState
 
     private void HandleJumpCancel()
     {
-        if (StateMachine.CurrentState == this)
-        {
+        /*if (StateMachine.CurrentState == this)
+        {*/
             var velocity = Player.Rb.velocity;
             velocity = new Vector2(velocity.x, velocity.y * 0.5f);
             Player.Rb.velocity = velocity;
-        }
+        /*}*/
     }
 
 }

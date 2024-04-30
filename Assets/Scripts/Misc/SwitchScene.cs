@@ -8,18 +8,19 @@ public class SwitchScene : MonoBehaviour
     public Animator animator;
     [SerializeField] GameObject destroyPlayer;
     [SerializeField] GameObject destroyAudio;
-    [SerializeField] GameObject destroyCamera;
+    [SerializeField] GameObject positionAnchor;
+    private Player player;
+    private GameObject playerObject;
     private void Start()
     {
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
+        playerObject = GameObject.FindWithTag("Player");
+        player = playerObject.GetComponent<Player>();
     }
     private void Update()
     {
-        if(Input.GetMouseButton(0))
-        {
-            fadeToLevel(1);
-        }
+       
     }
     // Update is called once per frame
     void OnTriggerEnter2D(Collider2D collision)
@@ -32,52 +33,55 @@ public class SwitchScene : MonoBehaviour
             switch (levelNumber)
             {
 
-                case 1:
-                    //Destroy(destroyPlayer);
-                    Destroy(destroyAudio);
-                    Destroy(destroyCamera);
-                    SceneManager.LoadScene(2);
-                    break;
                 case 2:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
-                    SceneManager.LoadScene(3); 
+                    SceneManager.LoadScene(3);
+                    player.transform.position = positionAnchor.transform.position;
+                    
+                    DontDestroyOnLoad(player);
+                    
+
                     break;
                 case 3:
-                    //Destroy(destroyPlayer);
+                   
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
                     SceneManager.LoadScene(4);
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 4:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
                     SceneManager.LoadScene(5);
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 5:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
                     SceneManager.LoadScene(6);
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 6:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
                     SceneManager.LoadScene(7);
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 7:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
                     SceneManager.LoadScene(8);
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 8:
-                    //Destroy(destroyPlayer);
+                    
                     Destroy(destroyAudio);
-                    Destroy(destroyCamera);
+                    SceneManager.LoadScene(9);
+                    player.transform.position = positionAnchor.transform.position;
+                    break;
+                case 9:
+                    Destroy(destroyPlayer);
+                    Destroy(destroyAudio);
                     SceneManager.LoadScene(0);
                     break;
 
@@ -89,10 +93,10 @@ public class SwitchScene : MonoBehaviour
         
     }
 
-    public void fadeToLevel(int levelIndex)
+    /*public void fadeToLevel(int levelIndex)
     {
         animator.SetTrigger("FadeOut");
-    }
+    }*/
 
     
      

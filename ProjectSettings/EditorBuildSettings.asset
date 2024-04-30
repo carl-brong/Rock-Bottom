@@ -6,10 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main/EpillepsyWarning.unity
+    guid: a6043b7360efd8b4a8fc8d5f200b08fd
+  - enabled: 1
     path: Assets/Scenes/Main/TitleScreen.unity
     guid: 5898decf312bcec4eae84536b5e016e5
   - enabled: 1
-    path: Assets/Scenes/Main/Intro Cutscene.unity
+    path: Assets/Scenes/Main/Intro Cutscene1.unity
     guid: 161718a713eed324da294a1d8ca4760f
   - enabled: 1
     path: Assets/Scenes/Main/Level1.unity
