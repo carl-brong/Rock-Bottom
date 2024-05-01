@@ -59,7 +59,7 @@ public class UIPauseMain : MonoBehaviour
         ResumedGame.Invoke();
     }
 
-    private void Restart()
+    public void Restart()
     {
         RestartedGame.Invoke();
     }

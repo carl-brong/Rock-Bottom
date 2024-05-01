@@ -50,6 +50,6 @@ public class MovablePlatform : MonoBehaviour
             collision.transform.parent = null;
            
         }
-        DontDestroyOnLoad(player);
+        //DontDestroyOnLoad(player);
     }
 }

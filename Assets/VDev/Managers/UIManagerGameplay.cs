@@ -342,7 +342,7 @@ public class UIManagerGameplay : MonoBehaviour
         _gameOver.gameObject.SetActive(true);
     }
 
-    private void CloseGameOverMenu(int type)
+    public void CloseGameOverMenu(int type)
     {
         // Input Reader Events
         _inputReader.PauseEvent -= OpenPauseMenu;
