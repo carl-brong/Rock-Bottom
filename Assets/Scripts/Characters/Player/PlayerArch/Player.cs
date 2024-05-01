@@ -205,6 +205,8 @@ public class Player : MonoBehaviour, IDamageable
     public void Die()
     {
         _gameStateManager.UpdateGameState(GameState.GameOver);
+       
+        
     }
 
     #endregion

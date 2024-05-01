@@ -37820,7 +37820,7 @@ Transform:
   m_GameObject: {fileID: 1174227332}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 281, y: -78.62, z: 0}
+  m_LocalPosition: {x: -25.8, y: -78.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -39896,7 +39896,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   destroyPlayer: {fileID: 1174227332}
   destroyAudio: {fileID: 1462659164}
-  positionAnchor: {fileID: 195206774}
+  destroyCamera: {fileID: 1995170428}
 --- !u!1 &1572753065
 GameObject:
   m_ObjectHideFlags: 0

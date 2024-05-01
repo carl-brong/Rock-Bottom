@@ -35,6 +35,8 @@ public class AllSeeingEye : MonoBehaviour
         float vel = playerRb.velocity.x;                            // get player's velocity.
         if (vel < 0) dirX = -1.0f;                                  // set direction player is facing by getting the current or most recent velocity of the player.
         else if (vel > 0) dirX = 1.0f;
+        Debug.Log(eyeContactCount);
+
     }
 
     void FixedUpdate()
@@ -51,6 +53,7 @@ public class AllSeeingEye : MonoBehaviour
         {
             inSight = (hit.collider.gameObject.name == "Player");                       // sets the boolean flag with the result of the raycast from the eye; true if it collides with the player.
             eyeContact = (dirX == direction.x * -1);                                    // for eye contact to occur, the player and the eye must be facing opposite directions (facing eachother); sets a boolean flag
+            inSight = true;
         }
         else inSight = false;                                                           // if player is out of the eye's line of sight, set false
 
@@ -65,6 +68,7 @@ public class AllSeeingEye : MonoBehaviour
         {
             Attack();
             eyeContactCount = 0.0f;
+            
         }
     }
 
