@@ -2068,7 +2068,7 @@ MonoBehaviour:
   animator: {fileID: 375846768}
   destroyPlayer: {fileID: 0}
   destroyAudio: {fileID: 0}
-  positionAnchor: {fileID: 0}
+  destroyCamera: {fileID: 0}
 --- !u!95 &375846768
 Animator:
   serializedVersion: 5
@@ -6778,7 +6778,7 @@ Transform:
   m_GameObject: {fileID: 984499839}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.77, y: 9.1, z: 0}
+  m_LocalPosition: {x: 17.76, y: 9.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
