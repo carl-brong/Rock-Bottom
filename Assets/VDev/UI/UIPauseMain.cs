@@ -54,7 +54,7 @@ public class UIPauseMain : MonoBehaviour
         _exitButton.onClick.RemoveListener(ExitLevel);
     }
 
-    private void Resume()
+    public void Resume()
     {
         ResumedGame.Invoke();
     }
