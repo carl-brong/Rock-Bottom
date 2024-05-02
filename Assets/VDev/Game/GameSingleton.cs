@@ -14,7 +14,6 @@ public class GameSingleton : MonoBehaviour
 {
     public static GameSingleton Instance { get; private set; }
     [FormerlySerializedAs("GameState")] [SerializeField] public GameStateSO GameStateSO;
-    private Player Player;
     public Canvas gameOverMenu;
 
     public GameState CurrentGameState => GameStateSO.CurrentGameState;
@@ -34,11 +33,6 @@ public class GameSingleton : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        Player = GameObject.FindWithTag("Player")?.GetComponent<Player>();
-    }
-
     public void UpdateGameState(GameState newGameState)
     {
         GameStateSO.UpdateGameState(newGameState);
@@ -50,8 +44,7 @@ public class GameSingleton : MonoBehaviour
         }
         
         
-        if (Player != null) return;
-        Player = GameObject.FindWithTag("Player")?.GetComponent<Player>();
+        
     }
 
     public void ReturnToPrevious()
@@ -64,6 +57,7 @@ public class GameSingleton : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         UpdateGameState(GameState.Gameplay);
         Time.timeScale = 1;
+        var Player = GameObject.FindWithTag("Player")?.GetComponent<Player>();
         Player.transform.position = Player.startpos;
         Player.Rb.velocity = Vector2.zero;
         Player.CurrentHealth = Player.MaxHealth;

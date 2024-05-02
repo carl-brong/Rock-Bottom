@@ -48,8 +48,7 @@ public class MovablePlatform : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.transform.parent = null;
-           
+            DontDestroyOnLoad(collision.gameObject);
         }
-        //DontDestroyOnLoad(player);
     }
 }
