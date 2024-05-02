@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 
 // Vincent Lee
@@ -57,6 +58,7 @@ public class Player : MonoBehaviour, IDamageable
     public PlayerData Data;
     public Vector3 startpos;
     public Canvas pauseMenu;
+    private Collider2D lamp;
 
     private void Awake()
     {
@@ -87,9 +89,10 @@ public class Player : MonoBehaviour, IDamageable
         #endregion
 
         input.PauseEvent += EnablePause;
-
+        input.InteractEvent += Interact;
 
     }
+    
 
     #region Updaters
 
@@ -110,6 +113,7 @@ public class Player : MonoBehaviour, IDamageable
         TempProj.PlayerHit -= LoseHealth;
         Spikes.HitSpike -= LoseHealth;
         input.PauseEvent -= EnablePause;
+        input.InteractEvent -= Interact;
     }
 
     // Update is called once per frame
@@ -130,6 +134,7 @@ public class Player : MonoBehaviour, IDamageable
             WallSlide();
         }
         //Carl Brong End
+        
     }
 
     private void FixedUpdate()
@@ -210,5 +215,32 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     #endregion
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Lamp"))
+        {
+            if (lamp != null) return;
+            lamp = other;
+            Debug.Log("Lamp");
+        }
+    }
     
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Lamp"))
+        {
+            if (lamp == other)
+            {
+                lamp = null;
+            }
+        }
+    }
+
+    private void Interact()
+    {
+        if (lamp == null) return;
+        lamp.gameObject.GetComponent<IInteractable>().Interact(this);
+        Debug.Log("Get Lamp");
+    }
 }
