@@ -20,7 +20,9 @@ public class GameOverMenu : BaseMenu
 
     private void Restart()
     {
-        
+        gameObject.SetActive(false);
+        inputReader.EnableGameplayControls();
+        GameSingleton.Instance.RestartCurrentLevel();
     }
 
     private void ExitToTitle()

@@ -53,7 +53,6 @@ public class Player : MonoBehaviour, IDamageable
 
     public PlayerData Data;
     public Vector3 startpos;
-    [SerializeField] private GameStateSO _gameStateManager;
     public Canvas pauseMenu;
 
     private void Awake()
@@ -204,9 +203,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        _gameStateManager.UpdateGameState(GameState.GameOver);
-       
-        
+        GameSingleton.Instance.UpdateGameState(GameState.GameOver);
     }
 
     #endregion

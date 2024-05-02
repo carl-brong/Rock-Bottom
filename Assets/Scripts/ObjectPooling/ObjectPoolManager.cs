@@ -4,6 +4,9 @@ using UnityEngine;
 
 // Source: https://www.youtube.com/watch?v=9O7uqbEe-xc
 
+// Vincent Lee
+// 5/2/24
+
 public class ObjectPoolManager : MonoBehaviour
 {
     private static readonly List<ObjectPool> ObjPools = new List<ObjectPool>();

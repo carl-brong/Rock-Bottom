@@ -1,8 +1,11 @@
 
 
 using System.ComponentModel;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 // Vincent Lee
 // 4/26/24
@@ -10,11 +13,12 @@ using UnityEngine.SceneManagement;
 public class GameSingleton : MonoBehaviour
 {
     public static GameSingleton Instance { get; private set; }
-    [SerializeField] private GameStateSO GameState;
-    [SerializeField] private Player Player;
+    [FormerlySerializedAs("GameState")] [SerializeField] public GameStateSO GameStateSO;
+    private Player Player;
+    public Canvas gameOverMenu;
 
-    public GameState CurrentGameState => GameState.CurrentGameState;
-
+    public GameState CurrentGameState => GameStateSO.CurrentGameState;
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -30,21 +34,65 @@ public class GameSingleton : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Player = GameObject.FindWithTag("Player")?.GetComponent<Player>();
+    }
+
     public void UpdateGameState(GameState newGameState)
     {
-        GameState.UpdateGameState(newGameState);
+        GameStateSO.UpdateGameState(newGameState);
+        
+        if (newGameState == GameState.GameOver)
+        {
+            Time.timeScale = 0;
+            gameOverMenu.gameObject.SetActive(true);
+        }
+        
+        
+        if (Player != null) return;
+        Player = GameObject.FindWithTag("Player")?.GetComponent<Player>();
     }
 
     public void ReturnToPrevious()
     {
-        GameState.ReturnToPreviousGameState();
+        GameStateSO.ReturnToPreviousGameState();
     }
 
     public void RestartCurrentLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        UpdateGameState(GameState.Gameplay);
+        Time.timeScale = 1;
         Player.transform.position = Player.startpos;
         Player.Rb.velocity = Vector2.zero;
         Player.CurrentHealth = Player.MaxHealth;
+        Player.HealHealth(1);
+    }
+
+    public void SetDifficulty()
+    {
+        var obj = GameObject.Find("--CHECKPOINTS--");
+        if (obj == null) return;
+        for (var i = 0; i < obj.transform.childCount; i++)
+        {
+            obj.transform.GetChild(i).gameObject.SetActive((PlayerPrefs.GetInt("Difficulty", 0) != 1));
+        }
+    }
+
+    public void ExitLevel()
+    {
+        CleanUp();
+        UpdateGameState(GameState.TitleScreen);
+        SceneManager.LoadScene(sceneBuildIndex: 1);
+    }
+
+    private static void CleanUp()
+    {
+        var objs = FindObjectsOfType<PersistObject>();
+        foreach (var obj in objs)
+        {
+            Destroy(obj.gameObject);
+        }
     }
 }

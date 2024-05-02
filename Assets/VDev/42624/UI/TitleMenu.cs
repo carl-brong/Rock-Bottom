@@ -18,7 +18,7 @@ public class TitleMenu : BaseMenu
         playButton.onClick.AddListener(OpenLevelSelector);
         optionsButton.onClick.AddListener(OpenOptions);
         exitButton.onClick.AddListener(ExitGame);
-        
+
         GameSingleton.Instance.UpdateGameState(GameState.TitleScreen);
     }
 

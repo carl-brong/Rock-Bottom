@@ -9,7 +9,7 @@ public class SwitchScene : MonoBehaviour
     [SerializeField] GameObject destroyPlayer;
     [SerializeField] GameObject destroyAudio;
     [SerializeField] GameObject destroyCamera;
-   // [SerializeField] GameObject positionAnchor;
+    [SerializeField] GameObject positionAnchor;
     private Player player;
     private GameObject playerObject;
     private void Start()
@@ -40,7 +40,8 @@ public class SwitchScene : MonoBehaviour
                     Destroy(destroyCamera);
                     
                     SceneManager.LoadScene(3);
-                    //player.transform.position = positionAnchor.transform.position;
+                    player.transform.position = positionAnchor.transform.position;
+                    
                     //Destroy(destroyPlayer);
                     //DontDestroyOnLoad(player);
 
@@ -53,7 +54,7 @@ public class SwitchScene : MonoBehaviour
                     
                     SceneManager.LoadScene(4);
                     Destroy(destroyPlayer);
-                    //player.transform.position = positionAnchor.transform.position;
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 4:
                     
@@ -61,7 +62,7 @@ public class SwitchScene : MonoBehaviour
                     Destroy(destroyCamera);
                     Destroy(destroyPlayer);
                     SceneManager.LoadScene(5);
-                    //player.transform.position = positionAnchor.transform.position;
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 5:
                     
@@ -69,7 +70,7 @@ public class SwitchScene : MonoBehaviour
                     Destroy(destroyCamera);
                     Destroy(destroyPlayer);
                     SceneManager.LoadScene(6);
-                    //player.transform.position = positionAnchor.transform.position;
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 6:
                     
@@ -77,7 +78,7 @@ public class SwitchScene : MonoBehaviour
                     Destroy(destroyCamera);
                     Destroy(destroyPlayer);
                     SceneManager.LoadScene(7);
-                    //player.transform.position = positionAnchor.transform.position;
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 7:
                     
@@ -85,7 +86,7 @@ public class SwitchScene : MonoBehaviour
                     Destroy(destroyCamera);
                     Destroy(destroyPlayer);
                     SceneManager.LoadScene(8);
-                    //player.transform.position = positionAnchor.transform.position;
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 8:
                     
@@ -93,18 +94,18 @@ public class SwitchScene : MonoBehaviour
                     Destroy(destroyCamera);
                     Destroy(destroyPlayer);
                     SceneManager.LoadScene(9);
-                    //player.transform.position = positionAnchor.transform.position;
+                    player.transform.position = positionAnchor.transform.position;
                     break;
                 case 9:
                     Destroy(destroyPlayer);
                     Destroy(destroyAudio);
                     Destroy(destroyCamera);
-                    SceneManager.LoadScene(1);
+                    GameSingleton.Instance.ExitLevel();
                     break;
 
             }
   
-           
+            player.startpos = player.transform.position;
 
         }
         
