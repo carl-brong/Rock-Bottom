@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Vincent Lee
+// 5/2/24
+
 public class CheckpointTrigger : MonoBehaviour
 {
     private Player _player;
