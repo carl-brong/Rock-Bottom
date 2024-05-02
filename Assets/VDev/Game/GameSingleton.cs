@@ -78,6 +78,7 @@ public class GameSingleton : MonoBehaviour
     {
         CleanUp();
         UpdateGameState(GameState.TitleScreen);
+        Destroy(gameObject);
         SceneManager.LoadScene(sceneBuildIndex: 1);
     }
 

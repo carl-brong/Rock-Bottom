@@ -102,5 +102,9 @@ public class PlayerMoveState : PlayerPrimaryMovementState
     {
         return Mathf.Abs(Player.Rb.velocity.x) < 0.01f && _moveX == 0;
     }
-    
+
+    public void OnDestroy()
+    {
+        Player.input.MoveEvent -= HandleInput;
+    }
 }

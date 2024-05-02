@@ -74,15 +74,19 @@ public class LevelSelectorMenu : BaseMenu
                 SceneManager.LoadScene(2);
                 break;
             case 2:
+                Destroy(GameSingleton.Instance.gameObject);
                 SceneManager.LoadScene(4);
                 break;
             case 3:
+                Destroy(GameSingleton.Instance.gameObject);
                 SceneManager.LoadScene(5);
                 break;
             case 4:
+                Destroy(GameSingleton.Instance.gameObject);
                 SceneManager.LoadScene(7);
                 break;
             case 5:
+                Destroy(GameSingleton.Instance.gameObject);
                 SceneManager.LoadScene(8);
                 break;
         }

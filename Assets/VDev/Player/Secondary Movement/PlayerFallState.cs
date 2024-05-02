@@ -62,4 +62,9 @@ public class PlayerFallState : PlayerSecondaryMovementState
             _jumpBufferCounter = Player.Data.jumpBuffer;
         }
     }
+    
+    public void OnDestroy()
+    {
+        Player.input.JumpEvent -= HandleJump;
+    }
 }

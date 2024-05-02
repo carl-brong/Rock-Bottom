@@ -61,5 +61,11 @@ public class PlayerCrouchState : PlayerSecondaryMovementState
             StateMachine.ChangeState(Player.JumpState);
         }
     }
+
+    public void OnDestroy()
+    {
+        Player.input.CrouchCancelEvent -= HandleCrouchCancel;
+        Player.input.JumpEvent -= HandleJump;
+    }
     
 }

@@ -46,5 +46,10 @@ public class PlayerSecondaryIdleState : PlayerSecondaryMovementState
             StateMachine.ChangeState(Player.CrouchState);
         }
     }
-    
+
+    public void OnDestroy()
+    {
+        Player.input.JumpEvent -= HandleJump;
+        Player.input.CrouchEvent -= HandleCrouch;
+    }
 }

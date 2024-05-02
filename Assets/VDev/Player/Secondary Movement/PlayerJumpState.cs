@@ -44,4 +44,8 @@ public class PlayerJumpState : PlayerSecondaryMovementState
         }
     }
 
+    public void OnDestroy()
+    {
+        Player.input.JumpCancelEvent -= HandleJumpCancel;
+    }
 }
