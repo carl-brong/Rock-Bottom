@@ -114,12 +114,6 @@ public class Player : MonoBehaviour, IDamageable
         Spikes.HitSpike -= LoseHealth;
         input.PauseEvent -= EnablePause;
         input.InteractEvent -= Interact;
-        PrimaryIdleState.OnDestroy();
-        MoveState.OnDestroy();
-        SecondaryIdleState.OnDestroy();
-        JumpState.OnDestroy();
-        CrouchState.OnDestroy();
-        FallState.OnDestroy();
     }
 
     // Update is called once per frame

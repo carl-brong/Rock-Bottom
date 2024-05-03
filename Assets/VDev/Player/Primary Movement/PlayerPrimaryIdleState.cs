@@ -26,9 +26,4 @@ public class PlayerPrimaryIdleState : PlayerPrimaryMovementState
     {
         _doMove = val != 0;
     }
-
-    public void OnDestroy()
-    {
-        Player.input.MoveEvent -= GetInput;
-    }
 }
