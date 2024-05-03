@@ -14,8 +14,8 @@ public class LevelProgressUpdater : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerPrefs.SetInt("Progress", level);
-            Debug.Log(PlayerPrefs.GetInt("Progress"));
+            if (level > PlayerPrefs.GetInt("Progress", 0))
+                PlayerPrefs.SetInt("Progress", level);
         }
     }
 }
