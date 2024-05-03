@@ -16,6 +16,10 @@ public class ConfirmPromptMenu : BaseMenu
         base.Awake();
         yesButton.onClick.AddListener(() =>
         {
+            if (GameSingleton.Instance.CurrentGameState == GameState.TitleScreen)
+            {
+                Application.Quit();
+            }
             GameSingleton.Instance.ExitLevel();
             Time.timeScale = 1;
         });
