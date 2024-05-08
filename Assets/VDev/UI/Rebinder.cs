@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Vincent Lee
+// 5/2/24
+
 public class ReBinder : MonoBehaviour
 {
     [SerializeField] private InputReader _input;

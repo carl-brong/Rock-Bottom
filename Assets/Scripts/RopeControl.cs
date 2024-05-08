@@ -90,6 +90,7 @@ public class RopeControl : MonoBehaviour
         foreach (var c in colliders)
             c.enabled = true;
 
+        DontDestroyOnLoad(PlayerTransform.gameObject);
     }
 
     void attachToRope(Transform colTran)

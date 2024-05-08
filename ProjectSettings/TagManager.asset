@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Terrain1
   - Terrain2
+  - Rope2D
+  - MovingPlatformH
+  - Lamp
   layers:
   - Default
   - TransparentFX
@@ -20,7 +23,7 @@ TagManager:
   - BG
   - BadStuff
   - Wall
-  - 
+  - TestCollide
   - 
   - 
   - 
